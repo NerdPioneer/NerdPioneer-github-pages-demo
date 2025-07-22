@@ -651,7 +651,7 @@ function createBlogPostElement(item) {
     const publishedDate = pubDate ? new Date(pubDate) : new Date();
     const formattedDate = publishedDate.toLocaleDateString('en-US', {
         year: 'numeric',
-        month: 'long',
+        month: 'short',
         day: 'numeric'
     });
     
@@ -660,9 +660,13 @@ function createBlogPostElement(item) {
     tempDiv.innerHTML = description;
     let excerpt = tempDiv.textContent || tempDiv.innerText || '';
     
+    // Try to extract image from description
+    const imgMatch = description.match(/<img[^>]+src="([^">]+)"/);
+    const imageUrl = imgMatch ? imgMatch[1] : null;
+    
     // Limit excerpt length
-    if (excerpt.length > 200) {
-        excerpt = excerpt.substring(0, 200) + '...';
+    if (excerpt.length > 150) {
+        excerpt = excerpt.substring(0, 150) + '...';
     }
     
     // Estimate reading time (average 200 words per minute)
@@ -673,33 +677,56 @@ function createBlogPostElement(item) {
     const postElement = document.createElement('article');
     postElement.className = 'blog-post';
     
-    // Create tags HTML
+    // Create image section
+    let imageHtml = '';
+    if (imageUrl) {
+        imageHtml = `<div class="blog-image"><img src="${imageUrl}" alt="${title}" loading="lazy"></div>`;
+    } else {
+        imageHtml = `<div class="blog-image"><i class="fas fa-newspaper"></i></div>`;
+    }
+    
+    // Create tags HTML (limit to 2 tags)
     let tagsHtml = '';
     if (categories.length > 0) {
         const tagList = Array.from(categories)
-            .slice(0, 3) // Limit to 3 tags
+            .slice(0, 2)
             .map(cat => `<span class="blog-tag">${cat.textContent}</span>`)
             .join('');
         tagsHtml = `<div class="blog-tags">${tagList}</div>`;
     }
     
     postElement.innerHTML = `
-        <h3><a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a></h3>
-        <div class="blog-meta">
-            <div class="blog-date">
-                <i class="fas fa-calendar"></i>
-                <span>${formattedDate}</span>
+        ${imageHtml}
+        <div class="blog-content-wrapper">
+            <h3><a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a></h3>
+            <div class="blog-meta">
+                <div class="blog-date">
+                    <i class="fas fa-calendar"></i>
+                    <span>${formattedDate}</span>
+                </div>
+                <div class="blog-reading-time">
+                    <i class="fas fa-clock"></i>
+                    <span>${readingTime} min read</span>
+                </div>
             </div>
-            <div class="blog-reading-time">
-                <i class="fas fa-clock"></i>
-                <span>${readingTime} min read</span>
+            ${tagsHtml}
+            <p class="blog-excerpt">${excerpt}</p>
+            <div class="blog-actions">
+                <a href="${link}" target="_blank" rel="noopener noreferrer" class="read-more">
+                    Read Article <i class="fas fa-external-link-alt"></i>
+                </a>
+                <div class="social-links">
+                    <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(link)}&text=${encodeURIComponent(title)}" 
+                       target="_blank" rel="noopener noreferrer" class="social-link" title="Share on Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(link)}" 
+                       target="_blank" rel="noopener noreferrer" class="social-link" title="Share on LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
             </div>
         </div>
-        ${tagsHtml}
-        <p class="blog-excerpt">${excerpt}</p>
-        <a href="${link}" target="_blank" rel="noopener noreferrer" class="read-more">
-            Read more <i class="fas fa-external-link-alt"></i>
-        </a>
     `;
     
     return postElement;
