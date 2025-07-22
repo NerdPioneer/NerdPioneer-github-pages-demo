@@ -25,13 +25,13 @@
                     <a href="#about" class="nav-link">About</a>
                 </li>
                 <li class="nav-item">
+                    <a href="#experience" class="nav-link">Experience</a>
+                </li>
+                <li class="nav-item">
                     <a href="#projects" class="nav-link">Projects</a>
                 </li>
                 <li class="nav-item">
                     <a href="#skills" class="nav-link">Skills</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
                 </li>
             </ul>
             <div class="nav-toggle" id="mobile-menu">
@@ -175,133 +175,133 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2 class="section-title">My Projects</h2>
-            <p class="section-subtitle">Here are some of my recent work and academic projects</p>
+            <h2 class="section-title">Security Projects</h2>
+            <p class="section-subtitle">Here are some of my cybersecurity and infrastructure projects</p>
             
             <div class="project-filters">
                 <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="web">Web Dev</button>
-                <button class="filter-btn" data-filter="mobile">Mobile</button>
-                <button class="filter-btn" data-filter="academic">Academic</button>
+                <button class="filter-btn" data-filter="security">Security</button>
+                <button class="filter-btn" data-filter="cloud">Cloud</button>
+                <button class="filter-btn" data-filter="network">Network</button>
             </div>
 
             <div class="projects-grid">
-                <div class="project-card" data-category="web">
+                <div class="project-card" data-category="security">
                     <div class="project-image">
-                        <i class="fas fa-shopping-cart"></i>
+                        <i class="fas fa-shield-alt"></i>
                     </div>
                     <div class="project-content">
-                        <h3>E-Commerce Platform</h3>
-                        <p>A full-stack e-commerce web application built with React and Node.js, featuring user authentication, payment integration, and admin dashboard.</p>
+                        <h3>Automated Incident Response in Microsoft Sentinel</h3>
+                        <p>Designed and implemented playbooks integrating Sentinel and ServiceNow, reducing response time by 30% in SOC environments through automated threat detection and response workflows.</p>
                         <div class="project-tech">
-                            <span>React</span>
-                            <span>Node.js</span>
-                            <span>MongoDB</span>
-                            <span>Express</span>
+                            <span>Microsoft Sentinel</span>
+                            <span>ServiceNow</span>
+                            <span>Azure Logic Apps</span>
+                            <span>KQL</span>
                         </div>
                         <div class="project-links">
                             <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card" data-category="academic">
+                <div class="project-card" data-category="cloud">
                     <div class="project-image">
-                        <i class="fas fa-brain"></i>
+                        <i class="fas fa-cloud-upload-alt"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Machine Learning Classifier</h3>
-                        <p>An image classification system using CNN to identify different types of objects with 95% accuracy. Built as part of my AI course.</p>
+                        <h3>Secure VPN Deployment on AWS</h3>
+                        <p>Built a secure VPN tunnel using AWS VPC and Site-to-Site VPN with multi-factor authentication, encryption protocols, and network segmentation for remote workforce security.</p>
                         <div class="project-tech">
-                            <span>Python</span>
-                            <span>TensorFlow</span>
-                            <span>Keras</span>
-                            <span>OpenCV</span>
+                            <span>AWS VPC</span>
+                            <span>Site-to-Site VPN</span>
+                            <span>IAM</span>
+                            <span>CloudTrail</span>
                         </div>
                         <div class="project-links">
                             <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="project-link"><i class="fas fa-file-pdf"></i> Paper</a>
+                            <a href="#" class="project-link"><i class="fas fa-file-alt"></i> Documentation</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card" data-category="mobile">
+                <div class="project-card" data-category="security">
                     <div class="project-image">
-                        <i class="fas fa-mobile-alt"></i>
+                        <i class="fas fa-search"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Study Buddy App</h3>
-                        <p>A cross-platform mobile app to help students organize their study schedules, track progress, and collaborate with peers.</p>
+                        <h3>SIEM Detection Rule Development</h3>
+                        <p>Created custom detection rules and threat hunting queries for Splunk and Sentinel, improving threat detection accuracy by 40% and reducing false positives.</p>
                         <div class="project-tech">
-                            <span>React Native</span>
-                            <span>Firebase</span>
-                            <span>Redux</span>
-                            <span>Expo</span>
+                            <span>Splunk</span>
+                            <span>Microsoft Sentinel</span>
+                            <span>MITRE ATT&CK</span>
+                            <span>Sigma Rules</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="project-link"><i class="fab fa-google-play"></i> Play Store</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Rules</a>
+                            <a href="#" class="project-link"><i class="fas fa-chart-line"></i> Analytics</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card" data-category="web">
-                    <div class="project-image">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Data Visualization Dashboard</h3>
-                        <p>An interactive dashboard for visualizing complex datasets with real-time updates and multiple chart types.</p>
-                        <div class="project-tech">
-                            <span>Vue.js</span>
-                            <span>D3.js</span>
-                            <span>Python</span>
-                            <span>FastAPI</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-category="academic">
+                <div class="project-card" data-category="network">
                     <div class="project-image">
                         <i class="fas fa-network-wired"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Network Protocol Simulator</h3>
-                        <p>A network simulation tool that models various networking protocols and analyzes performance metrics.</p>
+                        <h3>Network Security Monitoring Lab</h3>
+                        <p>Designed a comprehensive network security lab with IDS/IPS deployment, traffic analysis, and threat simulation using Security Onion and pfSense firewalls.</p>
                         <div class="project-tech">
-                            <span>C++</span>
-                            <span>Qt</span>
+                            <span>Security Onion</span>
+                            <span>pfSense</span>
+                            <span>Suricata</span>
                             <span>Wireshark</span>
-                            <span>Python</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="project-link"><i class="fas fa-file-pdf"></i> Documentation</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Config</a>
+                            <a href="#" class="project-link"><i class="fas fa-file-pdf"></i> Lab Guide</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card" data-category="web">
+                <div class="project-card" data-category="cloud">
                     <div class="project-image">
-                        <i class="fas fa-blog"></i>
+                        <i class="fas fa-lock"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Personal Blog Platform</h3>
-                        <p>A modern blog platform with markdown support, comment system, and SEO optimization built with Next.js.</p>
+                        <h3>Zero Trust Architecture Implementation</h3>
+                        <p>Implemented Zero Trust principles using Azure AD, Conditional Access policies, and endpoint security tools to secure hybrid cloud environments.</p>
                         <div class="project-tech">
-                            <span>Next.js</span>
-                            <span>TypeScript</span>
-                            <span>Prisma</span>
-                            <span>PostgreSQL</span>
+                            <span>Azure AD</span>
+                            <span>Conditional Access</span>
+                            <span>Intune</span>
+                            <span>Defender ATP</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Policies</a>
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="security">
+                    <div class="project-image">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Vulnerability Assessment Automation</h3>
+                        <p>Developed automated vulnerability scanning and reporting system using Nessus API and Python, streamlining security assessments and compliance reporting.</p>
+                        <div class="project-tech">
+                            <span>Nessus</span>
+                            <span>Python</span>
+                            <span>REST APIs</span>
+                            <span>PowerBI</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Scripts</a>
+                            <a href="#" class="project-link"><i class="fas fa-chart-bar"></i> Dashboard</a>
                         </div>
                     </div>
                 </div>
@@ -312,44 +312,10 @@
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <h2 class="section-title">Technical Proficiencies</h2>
+            <h2 class="section-title">Professional Certifications</h2>
             <div class="skills-content">
                 <div class="skills-category">
-                    <h3><i class="fas fa-code"></i> Core Programming Languages</h3>
-                    <div class="skills-grid">
-                        <div class="skill-item">
-                            <i class="fab fa-python"></i>
-                            <span>Python</span>
-                            <div class="skill-level">
-                                <div class="skill-progress" data-level="90"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-js-square"></i>
-                            <span>JavaScript</span>
-                            <div class="skill-level">
-                                <div class="skill-progress" data-level="85"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-html5"></i>
-                            <span>HTML</span>
-                            <div class="skill-level">
-                                <div class="skill-progress" data-level="95"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-css3-alt"></i>
-                            <span>CSS</span>
-                            <div class="skill-level">
-                                <div class="skill-progress" data-level="90"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skills-category">
-                    <h3><i class="fas fa-shield-alt"></i> Professional Certifications</h3>
+                    <h3><i class="fas fa-shield-alt"></i> CompTIA Certification Path</h3>
                     <div class="certifications-grid">
                         <div class="certification-item">
                             <div class="cert-badge">
@@ -423,7 +389,7 @@
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h4>Email</h4>
-                            <p>student@university.edu</p>
+                            <p>ezekiel.obeisun@email.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -437,20 +403,17 @@
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h4>Location</h4>
-                            <p>City, State</p>
+                            <p>Dallas, TX</p>
                         </div>
                     </div>
                     <div class="social-links">
-                        <a href="https://github.com/NerdPioneer" class="social-link">
+                        <a href="https://github.com/ezekielobeisun" class="social-link">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="https://linkedin.com/in/nerdpioneer" class="social-link">
+                        <a href="https://linkedin.com/in/ezekiel-obeisun" class="social-link">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="https://twitter.com/nerdpioneer" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="mailto:student@university.edu" class="social-link">
+                        <a href="mailto:ezekiel.obeisun@email.com" class="social-link">
                             <i class="fas fa-envelope"></i>
                         </a>
                     </div>
@@ -480,31 +443,31 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3><i class="fas fa-graduation-cap"></i> NerdPioneer</h3>
-                    <p>Computer Science Student passionate about creating innovative solutions and learning new technologies.</p>
+                    <h3><i class="fas fa-shield-alt"></i> Ezekiel Obeisun Jr.</h3>
+                    <p>Cybersecurity Analyst passionate about securing digital systems and building robust network infrastructure.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About</a></li>
+                        <li><a href="#experience">Experience</a></li>
                         <li><a href="#projects">Projects</a></li>
-                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#skills">Certifications</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Connect</h4>
                     <div class="footer-social">
-                        <a href="https://github.com/NerdPioneer"><i class="fab fa-github"></i></a>
-                        <a href="https://linkedin.com/in/nerdpioneer"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://twitter.com/nerdpioneer"><i class="fab fa-twitter"></i></a>
-                        <a href="mailto:student@university.edu"><i class="fas fa-envelope"></i></a>
+                        <a href="https://github.com/ezekielobeisun"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/ezekiel-obeisun"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:ezekiel.obeisun@email.com"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 NerdPioneer. Built with ❤️ for GitHub Pages.</p>
+                <p>&copy; 2025 Ezekiel Obeisun Jr. Cybersecurity Professional Portfolio.</p>
             </div>
         </div>
     </footer>
