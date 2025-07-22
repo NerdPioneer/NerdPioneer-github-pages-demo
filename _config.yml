@@ -1,0 +1,58 @@
+# GitHub Pages Configuration
+
+# Plugins (GitHub Pages automatically includes these)
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Site settings
+title: "Student Portfolio - NerdPioneer"
+description: "Computer Science Student Portfolio showcasing projects, skills, and academic achievements"
+url: "https://nerdpioneer.github.io"
+baseurl: ""
+
+# Author information
+author:
+  name: "NerdPioneer"
+  email: "student@university.edu"
+
+# Social media
+social:
+  github: "NerdPioneer"
+  linkedin: "nerdpioneer"
+  twitter: "nerdpioneer"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Exclude from processing
+exclude:
+  - README.md
+  - LICENSE
+  - .gitignore
+  - .github/
+
+# Include files
+include:
+  - _pages
+
+# Collections (if needed for blog posts later)
+collections:
+  projects:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+
+# SEO settings
+lang: en_US
+image: /assets/images/social-share.png

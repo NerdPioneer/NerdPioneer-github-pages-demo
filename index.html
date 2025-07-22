@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portfolio - NerdPioneer</title>
+    <meta name="description" content="Student Portfolio showcasing projects, skills, and academic achievements">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                Portfolio
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="highlight">NerdPioneer</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Computer Science Student & Aspiring Developer
+                    </p>
+                    <p class="hero-description">
+                        Passionate about technology, problem-solving, and creating innovative solutions. 
+                        Currently pursuing my degree while building exciting projects and learning new technologies.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">View My Work</a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="floating-elements">
+                            <div class="floating-icon" style="--delay: 0s">
+                                <i class="fab fa-javascript"></i>
+                            </div>
+                            <div class="floating-icon" style="--delay: 1s">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <div class="floating-icon" style="--delay: 2s">
+                                <i class="fab fa-react"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Student & Developer</h3>
+                    <p>
+                        I'm a dedicated Computer Science student with a passion for learning and creating. 
+                        My journey in technology started with curiosity about how things work, and has 
+                        evolved into a deep appreciation for elegant code and innovative solutions.
+                    </p>
+                    <p>
+                        When I'm not coding, you can find me exploring new technologies, contributing to 
+                        open-source projects, or working on personal projects that challenge my skills 
+                        and expand my knowledge.
+                    </p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <h4>15+</h4>
+                            <p>Projects Completed</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>3.8</h4>
+                            <p>GPA</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>2+</h4>
+                            <p>Years Coding</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="education-card">
+                        <h4><i class="fas fa-university"></i> Education</h4>
+                        <div class="education-item">
+                            <h5>Bachelor of Computer Science</h5>
+                            <p>University Name</p>
+                            <span>2022 - 2026</span>
+                        </div>
+                        <div class="course-highlights">
+                            <h6>Relevant Coursework:</h6>
+                            <ul>
+                                <li>Data Structures & Algorithms</li>
+                                <li>Software Engineering</li>
+                                <li>Database Systems</li>
+                                <li>Web Development</li>
+                                <li>Computer Networks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <p class="section-subtitle">Here are some of my recent work and academic projects</p>
+            
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web Dev</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="academic">Academic</button>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card" data-category="web">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>E-Commerce Platform</h3>
+                        <p>A full-stack e-commerce web application built with React and Node.js, featuring user authentication, payment integration, and admin dashboard.</p>
+                        <div class="project-tech">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                            <span>Express</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="academic">
+                    <div class="project-image">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Machine Learning Classifier</h3>
+                        <p>An image classification system using CNN to identify different types of objects with 95% accuracy. Built as part of my AI course.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>TensorFlow</span>
+                            <span>Keras</span>
+                            <span>OpenCV</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="project-link"><i class="fas fa-file-pdf"></i> Paper</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="mobile">
+                    <div class="project-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Study Buddy App</h3>
+                        <p>A cross-platform mobile app to help students organize their study schedules, track progress, and collaborate with peers.</p>
+                        <div class="project-tech">
+                            <span>React Native</span>
+                            <span>Firebase</span>
+                            <span>Redux</span>
+                            <span>Expo</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="project-link"><i class="fab fa-google-play"></i> Play Store</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web">
+                    <div class="project-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Data Visualization Dashboard</h3>
+                        <p>An interactive dashboard for visualizing complex datasets with real-time updates and multiple chart types.</p>
+                        <div class="project-tech">
+                            <span>Vue.js</span>
+                            <span>D3.js</span>
+                            <span>Python</span>
+                            <span>FastAPI</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="academic">
+                    <div class="project-image">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Network Protocol Simulator</h3>
+                        <p>A network simulation tool that models various networking protocols and analyzes performance metrics.</p>
+                        <div class="project-tech">
+                            <span>C++</span>
+                            <span>Qt</span>
+                            <span>Wireshark</span>
+                            <span>Python</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="project-link"><i class="fas fa-file-pdf"></i> Documentation</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web">
+                    <div class="project-image">
+                        <i class="fas fa-blog"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Personal Blog Platform</h3>
+                        <p>A modern blog platform with markdown support, comment system, and SEO optimization built with Next.js.</p>
+                        <div class="project-tech">
+                            <span>Next.js</span>
+                            <span>TypeScript</span>
+                            <span>Prisma</span>
+                            <span>PostgreSQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Proficiencies</h2>
+            <div class="skills-content">
+                <div class="skills-category">
+                    <h3><i class="fas fa-code"></i> Core Programming Languages</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <i class="fab fa-python"></i>
+                            <span>Python</span>
+                            <div class="skill-level">
+                                <div class="skill-progress" data-level="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js-square"></i>
+                            <span>JavaScript</span>
+                            <div class="skill-level">
+                                <div class="skill-progress" data-level="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML</span>
+                            <div class="skill-level">
+                                <div class="skill-progress" data-level="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS</span>
+                            <div class="skill-level">
+                                <div class="skill-progress" data-level="90"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h3><i class="fas fa-shield-alt"></i> Professional Certifications</h3>
+                    <div class="certifications-grid">
+                        <div class="certification-item">
+                            <div class="cert-badge">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="cert-info">
+                                <h4>CompTIA A+</h4>
+                                <p>Hardware & Software Fundamentals</p>
+                                <span class="cert-status">Certified</span>
+                            </div>
+                        </div>
+                        
+                        <div class="certification-item">
+                            <div class="cert-badge">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="cert-info">
+                                <h4>CompTIA Network+</h4>
+                                <p>Networking Infrastructure</p>
+                                <span class="cert-status">Certified</span>
+                            </div>
+                        </div>
+                        
+                        <div class="certification-item">
+                            <div class="cert-badge">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="cert-info">
+                                <h4>CompTIA Security+</h4>
+                                <p>Cybersecurity Fundamentals</p>
+                                <span class="cert-status">Certified</span>
+                            </div>
+                        </div>
+                        
+                        <div class="certification-item">
+                            <div class="cert-badge">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="cert-info">
+                                <h4>CompTIA CySA+</h4>
+                                <p>Cybersecurity Analyst</p>
+                                <span class="cert-status">Certified</span>
+                            </div>
+                        </div>
+                        
+                        <div class="certification-item">
+                            <div class="cert-badge">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <div class="cert-info">
+                                <h4>CompTIA Cloud+</h4>
+                                <p>Cloud Technologies</p>
+                                <span class="cert-status">Certified</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Let's connect and discuss opportunities!</p>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>student@university.edu</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>City, State</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/NerdPioneer" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/nerdpioneer" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/nerdpioneer" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="mailto:student@university.edu" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-graduation-cap"></i> NerdPioneer</h3>
+                    <p>Computer Science Student passionate about creating innovative solutions and learning new technologies.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://github.com/NerdPioneer"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/nerdpioneer"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://twitter.com/nerdpioneer"><i class="fab fa-twitter"></i></a>
+                        <a href="mailto:student@university.edu"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 NerdPioneer. Built with ❤️ for GitHub Pages.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
