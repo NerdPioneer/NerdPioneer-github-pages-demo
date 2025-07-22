@@ -101,12 +101,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-secondary {
     background: transparent;
-    color: #667eea;
-    border: 2px solid #667eea;
+    color: #FF9900;
+    border: 2px solid #FF9900;
 }
 
 .btn-secondary:hover {
-    background: #667eea;
+    background: #FF9900;
     color: white;
     transform: translateY(-2px);
 }
@@ -995,54 +995,15 @@ h1, h2, h3, h4, h5, h6 {
 .footer {
     background: #1e293b;
     color: #e2e8f0;
-    padding: 3rem 0 1rem;
+    padding: 3rem 0 2rem;
 }
 
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.footer-section h3,
-.footer-section h4 {
-    color: white;
-    margin-bottom: 1rem;
-}
-
-.footer-section h3 {
+.footer-simple {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1.5rem;
-}
-
-.footer-section h3 i {
-    color: #667eea;
-}
-
-.footer-section p {
-    color: #94a3b8;
-    line-height: 1.6;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-section ul li a {
-    color: #94a3b8;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-section ul li a:hover {
-    color: #667eea;
+    gap: 2rem;
+    text-align: center;
 }
 
 .footer-social {
@@ -1051,8 +1012,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-social a {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background: #334155;
     color: #e2e8f0;
     display: flex;
@@ -1060,19 +1021,36 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     border-radius: 50%;
     text-decoration: none;
+    font-size: 1.25rem;
     transition: all 0.3s ease;
 }
 
 .footer-social a:hover {
     background: #667eea;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
 }
 
-.footer-bottom {
-    text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid #334155;
+.footer-simple p {
     color: #94a3b8;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 2rem 0 1.5rem;
+    }
+    
+    .footer-simple {
+        gap: 1.5rem;
+    }
+    
+    .footer-social a {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
 }
 
 /* Back to Top Button */

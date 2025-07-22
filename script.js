@@ -70,7 +70,13 @@ function initSmoothScrolling() {
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
             
-            if (targetSection) {
+            // Special handling for Home link - scroll to absolute top
+            if (targetId === '#home') {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            } else if (targetSection) {
                 const navbarHeight = document.querySelector('.navbar').offsetHeight;
                 const targetPosition = targetSection.offsetTop - navbarHeight;
                 
@@ -78,13 +84,13 @@ function initSmoothScrolling() {
                     top: targetPosition,
                     behavior: 'smooth'
                 });
-                
-                // Close mobile menu if open
-                const navMenu = document.querySelector('.nav-menu');
-                const navToggle = document.querySelector('.nav-toggle');
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
             }
+            
+            // Close mobile menu if open
+            const navMenu = document.querySelector('.nav-menu');
+            const navToggle = document.querySelector('.nav-toggle');
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
         });
     });
 }
