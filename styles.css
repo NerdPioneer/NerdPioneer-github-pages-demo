@@ -100,14 +100,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-secondary {
-    background: transparent;
-    color: #FF9900;
-    border: 2px solid #FF9900;
+    background: white;
+    color: #1e293b;
+    border: 2px solid white;
 }
 
 .btn-secondary:hover {
     background: #FF9900;
     color: white;
+    border: 2px solid #FF9900;
     transform: translateY(-2px);
 }
 
@@ -187,20 +188,6 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
 }
 
-/* Experience nav link - Amazon orange color */
-.nav-link[href="#experience"] {
-    color: #FF9900;
-}
-
-.nav-link[href="#experience"]:hover,
-.nav-link[href="#experience"].active {
-    color: #FF9900;
-}
-
-.nav-link[href="#experience"]::after {
-    background: #FF9900;
-}
-
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -278,6 +265,35 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 2.5rem;
     color: #cbd5e1;
     line-height: 1.7;
+}
+
+.hero-social {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+    font-size: 1.25rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .hero-buttons {
