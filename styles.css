@@ -482,6 +482,31 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.7;
 }
 
+.about-highlights {
+    list-style: none;
+    margin: 1.5rem 0;
+    padding: 0;
+}
+
+.about-highlights li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: #64748b;
+    line-height: 1.7;
+}
+
+.about-highlights li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 1.1;
+}
+
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
