@@ -7,21 +7,22 @@ plugins:
   - jekyll-seo-tag
 
 # Site settings
-title: "Student Portfolio - NerdPioneer"
-description: "Computer Science Student Portfolio showcasing projects, skills, and academic achievements"
+title: "NerdPioneer - Ezekiel Obeisun Jr"
+description: "Cybersecurity Analyst Portfolio showcasing professional experience, certifications, and security projects"
 url: "https://nerdpioneer.github.io"
 baseurl: ""
 
 # Author information
 author:
-  name: "NerdPioneer"
-  email: "student@university.edu"
+  name: "Ezekiel Obeisun Jr"
+  email: "ezekiel.obeisun@email.com"
 
 # Social media
 social:
   github: "NerdPioneer"
-  linkedin: "nerdpioneer"
-  twitter: "nerdpioneer"
+  linkedin: "ezekiel-obeisun"
+  medium: "nerdpioneer"
+  medium_url: "https://medium.com/@nerdpioneer"
 
 # Build settings
 markdown: kramdown

@@ -583,3 +583,150 @@ window.portfolioUtils = {
     debounce,
     throttle
 };
+
+// Medium RSS Feed Functionality
+function initMediumFeed() {
+    const mediumFeed = document.getElementById('medium-feed');
+    const loadingSpinner = document.querySelector('.loading-spinner');
+    
+    if (!mediumFeed) return;
+    
+    // Medium RSS URL
+    const mediumRssUrl = 'https://medium.com/feed/@nerdpioneer';
+    
+    // Using a CORS proxy service to fetch the RSS feed
+    const proxyUrl = 'https://api.allorigins.win/get?url=';
+    const targetUrl = encodeURIComponent(mediumRssUrl);
+    
+    fetch(proxyUrl + targetUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data.contents) {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data.contents, 'text/xml');
+                const items = xmlDoc.querySelectorAll('item');
+                
+                displayMediumPosts(items);
+            } else {
+                throw new Error('No content received');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching Medium feed:', error);
+            displayErrorMessage();
+        });
+}
+
+function displayMediumPosts(items) {
+    const mediumFeed = document.getElementById('medium-feed');
+    const loadingSpinner = document.querySelector('.loading-spinner');
+    
+    if (loadingSpinner) {
+        loadingSpinner.style.display = 'none';
+    }
+    
+    if (items.length === 0) {
+        displayErrorMessage('No blog posts found.');
+        return;
+    }
+    
+    // Display up to 3 most recent posts
+    const postsToShow = Math.min(3, items.length);
+    
+    for (let i = 0; i < postsToShow; i++) {
+        const item = items[i];
+        const post = createBlogPostElement(item);
+        mediumFeed.appendChild(post);
+    }
+}
+
+function createBlogPostElement(item) {
+    const title = item.querySelector('title')?.textContent || 'Untitled';
+    const link = item.querySelector('link')?.textContent || '#';
+    const pubDate = item.querySelector('pubDate')?.textContent || '';
+    const description = item.querySelector('description')?.textContent || '';
+    const categories = item.querySelectorAll('category');
+    
+    // Parse publication date
+    const publishedDate = pubDate ? new Date(pubDate) : new Date();
+    const formattedDate = publishedDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    
+    // Extract text content from description (removing HTML tags)
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = description;
+    let excerpt = tempDiv.textContent || tempDiv.innerText || '';
+    
+    // Limit excerpt length
+    if (excerpt.length > 200) {
+        excerpt = excerpt.substring(0, 200) + '...';
+    }
+    
+    // Estimate reading time (average 200 words per minute)
+    const wordCount = excerpt.split(' ').length;
+    const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+    
+    // Create post element
+    const postElement = document.createElement('article');
+    postElement.className = 'blog-post';
+    
+    // Create tags HTML
+    let tagsHtml = '';
+    if (categories.length > 0) {
+        const tagList = Array.from(categories)
+            .slice(0, 3) // Limit to 3 tags
+            .map(cat => `<span class="blog-tag">${cat.textContent}</span>`)
+            .join('');
+        tagsHtml = `<div class="blog-tags">${tagList}</div>`;
+    }
+    
+    postElement.innerHTML = `
+        <h3><a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a></h3>
+        <div class="blog-meta">
+            <div class="blog-date">
+                <i class="fas fa-calendar"></i>
+                <span>${formattedDate}</span>
+            </div>
+            <div class="blog-reading-time">
+                <i class="fas fa-clock"></i>
+                <span>${readingTime} min read</span>
+            </div>
+        </div>
+        ${tagsHtml}
+        <p class="blog-excerpt">${excerpt}</p>
+        <a href="${link}" target="_blank" rel="noopener noreferrer" class="read-more">
+            Read more <i class="fas fa-external-link-alt"></i>
+        </a>
+    `;
+    
+    return postElement;
+}
+
+function displayErrorMessage(message = 'Unable to load blog posts at this time.') {
+    const mediumFeed = document.getElementById('medium-feed');
+    const loadingSpinner = document.querySelector('.loading-spinner');
+    
+    if (loadingSpinner) {
+        loadingSpinner.style.display = 'none';
+    }
+    
+    const errorElement = document.createElement('div');
+    errorElement.className = 'error-message';
+    errorElement.innerHTML = `
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3>Oops!</h3>
+        <p>${message}</p>
+        <p>Please visit my <a href="https://medium.com/@nerdpioneer" target="_blank" rel="noopener noreferrer">Medium profile</a> directly to read my latest posts.</p>
+    `;
+    
+    mediumFeed.appendChild(errorElement);
+}
+
+// Initialize Medium feed when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Small delay to ensure other scripts have loaded
+    setTimeout(initMediumFeed, 1000);
+});
