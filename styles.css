@@ -187,6 +187,20 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
 }
 
+/* Experience nav link - Amazon orange color */
+.nav-link[href="#experience"] {
+    color: #FF9900;
+}
+
+.nav-link[href="#experience"]:hover,
+.nav-link[href="#experience"].active {
+    color: #FF9900;
+}
+
+.nav-link[href="#experience"]::after {
+    background: #FF9900;
+}
+
 .nav-toggle {
     display: none;
     flex-direction: column;
