@@ -7,49 +7,107 @@
     <meta name="description" content="Ezekiel Obeisun Jr. is a SOC Analyst & Cloud Computing student at WGU—specializing in incident response, cloud security, and secure infrastructure.">
     <link rel="canonical" href="https://yourdomain.com/">
     
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='brain-grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M25 35c-5 0-9 4-9 9v12c0 5 4 9 9 9h6c2 3 5 5 9 5s7-2 9-5h6c5 0 9-4 9-9V44c0-5-4-9-9-9h-4c-1-6-6-10-12-10s-11 4-12 10h-2zm5 5h8c3 0 5 2 5 5v8c0 3-2 5-5 5h-8c-3 0-5-2-5-5v-8c0-3 2-5 5-5zm20 0h8c3 0 5 2 5 5v8c0 3-2 5-5 5h-8c-3 0-5-2-5-5v-8c0-3 2-5 5-5z' fill='url(%23brain-grad)'/%3E%3Ccircle cx='35' cy='47' r='2' fill='white' opacity='0.8'/%3E%3Ccircle cx='55' cy='47' r='2' fill='white' opacity='0.8'/%3E%3Cpath d='M30 30c2-8 8-15 16-15s14 7 16 15' stroke='url(%23brain-grad)' stroke-width='2' fill='none'/%3E%3C/svg%3E">
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='brain-grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M25 35c-5 0-9 4-9 9v12c0 5 4 9 9 9h6c2 3 5 5 9 5s7-2 9-5h6c5 0 9-4 9-9V44c0-5-4-9-9-9h-4c-1-6-6-10-12-10s-11 4-12 10h-2zm5 5h8c3 0 5 2 5 5v8c0 3-2 5-5 5h-8c-3 0-5-2-5-5v-8c0-3 2-5 5-5zm20 0h8c3 0 5 2 5 5v8c0 3-2 5-5 5h-8c-3 0-5-2-5-5v-8c0-3 2-5 5-5z' fill='url(%23brain-grad)'/%3E%3Ccircle cx='35' cy='47' r='2' fill='white' opacity='0.8'/%3E%3Ccircle cx='55' cy='47' r='2' fill='white' opacity='0.8'/%3E%3Cpath d='M30 30c2-8 8-15 16-15s14 7 16 15' stroke='url(%23brain-grad)' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+    
     <!-- Open Graph (for social shares) -->
     <meta property="og:title" content="Ezekiel Obeisun Jr. — Cybersecurity Analyst & Cloud Engineer">
     <meta property="og:description" content="Securing systems, solving complex network problems, and delivering 1% better every day.">
     <meta property="og:image" content="https://yourdomain.com/path/to/social-share.png">
     <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="twitter:title" content="Ezekiel Obeisun Jr. — Cybersecurity Analyst & Cloud Engineer">
+    <meta name="twitter:description" content="Securing systems, solving complex network problems, and delivering 1% better every day.">
+    
+    <!-- Performance Optimization -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Critical CSS Preload -->
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    
+    <!-- Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Icons -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ezekiel Obeisun Jr.",
+      "jobTitle": "SOC Analyst Level 2",
+      "description": "Cybersecurity Analyst & Cloud Engineer specializing in incident response, cloud security, and secure infrastructure",
+      "url": "https://yourdomain.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/nerdpioneer",
+        "https://github.com/NerdPioneer",
+        "https://medium.com/@nerdpioneer"
+      ],
+      "knowsAbout": ["Cybersecurity", "Cloud Computing", "Incident Response", "Network Security", "AWS", "Azure", "Microsoft Sentinel"],
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Western Governors University"
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Mountain View College"
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
+    <!-- Skip Navigation -->
+    <a href="#main-content" class="skip-nav">Skip to main content</a>
+    
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <a href="#home" class="nav-logo">
-                <i class="fas fa-shield-alt"></i>
+            <a href="#home" class="nav-logo" aria-label="NerdPioneer Homepage">
+                <i class="fas fa-shield-alt" aria-hidden="true"></i>
                 NerdPioneer
             </a>
-            <ul class="nav-menu" id="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
+            <ul class="nav-menu" id="nav-menu" role="menubar">
+                <li class="nav-item" role="none">
+                    <a href="#home" class="nav-link" role="menuitem">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
+                <li class="nav-item" role="none">
+                    <a href="#about" class="nav-link" role="menuitem">About</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projects</a>
+                <li class="nav-item" role="none">
+                    <a href="#projects" class="nav-link" role="menuitem">Projects</a>
                 </li>
             </ul>
-            <div class="nav-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+            <button class="nav-toggle" id="mobile-menu" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-floating-elements">
+    <main id="main-content">
+    <section id="home" class="hero" role="banner">
+        <div class="hero-floating-elements" aria-hidden="true">
             <div class="floating-atom" style="--delay: 0s; --duration: 8s;">
                 <i class="fas fa-atom"></i>
             </div>
@@ -77,7 +135,7 @@
         </div>
         <div class="container">
             <div class="hero-content">
-                                <div class="hero-text">
+                <div class="hero-text">
                     <h1 class="hero-title glitch-effect" data-text="TURNING THREATS INTO RESILIENCE">
                         TURNING THREATS INTO RESILIENCE
                     </h1>
@@ -90,19 +148,21 @@
                         As an effective team collaborator and lifelong learner—hence the motto "1% Better Every Day" from <em>Atomic Habits</em> by James Clear, one of my favorite authors—I thrive in team environments, adapt rapidly to new tools and processes, and welcome feedback as fuel for growth.
                     </p>
                     <div class="hero-buttons">
-                        <a href="https://www.linkedin.com/in/nerdpioneer" target="_blank" class="btn btn-secondary">
-                            <i class="fab fa-linkedin"></i> LinkedIn
+                        <a href="https://www.linkedin.com/in/nerdpioneer" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" aria-label="Visit Ezekiel's LinkedIn Profile">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
                         </a>
-                        <a href="https://github.com/NerdPioneer" target="_blank" class="btn btn-secondary">
-                            <i class="fab fa-github"></i> GitHub
+                        <a href="https://github.com/NerdPioneer" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" aria-label="Visit Ezekiel's GitHub Profile">
+                            <i class="fab fa-github" aria-hidden="true"></i> GitHub
                         </a>
-                        <a href="https://medium.com/@nerdpioneer" target="_blank" class="btn btn-secondary">
-                            <i class="fab fa-medium"></i> Medium
+                        <a href="https://medium.com/@nerdpioneer" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" aria-label="Visit Ezekiel's Medium Blog">
+                            <i class="fab fa-medium" aria-hidden="true"></i> Medium
                         </a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    <div class="hero-image-placeholder"></div>
+                    <div class="image-placeholder" style="width:500px;height:500px;background:#e2e8f0;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#64748b;border:3px dashed #cbd5e1;box-shadow:0 8px 32px rgba(0,0,0,0.08);" role="img" aria-label="Placeholder for professional headshot">
+                        Your Image Here
+                    </div>
                 </div>
             </div>
         </div>
@@ -432,7 +492,7 @@
                         
                         <div class="certification-item">
                             <div class="cert-badge">
-                                <i class="fas fa-cloud-protection"></i>
+                                <i class="fas fa-shield-alt"></i>
                             </div>
                             <div class="cert-info">
                                 <h4>Microsoft AZ-500</h4>
@@ -482,17 +542,18 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-simple">
                 <div class="footer-social">
-                    <a href="https://github.com/NerdPioneer"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/nerdpioneer"><i class="fab fa-linkedin"></i></a>
-                    <a href="mailto:ezekiel.obeisun@email.com"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/NerdPioneer" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile"><i class="fab fa-github" aria-hidden="true"></i></a>
+                    <a href="https://www.linkedin.com/in/nerdpioneer" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                    <a href="mailto:ezekiel.obeisun@email.com" aria-label="Send Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
                 </div>
-                <p>&copy; 2025 All rights reserved</p>
+                <p>&copy; 2025 Ezekiel Obeisun Jr. All rights reserved</p>
             </div>
         </div>
     </footer>

@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /script.js
+Disallow: /styles.css
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
 
 # Sitemap
 Sitemap: https://nerdpioneer.github.io/sitemap.xml

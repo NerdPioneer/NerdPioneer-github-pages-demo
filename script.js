@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Navigation functionality
     initNavigation();
     
+    // Mobile menu
+    initMobileMenu();
+    
     // Smooth scrolling
     initSmoothScrolling();
     
@@ -370,8 +373,12 @@ function initMobileMenu() {
     
     if (mobileMenu && navMenu) {
         mobileMenu.addEventListener('click', function() {
-            this.classList.toggle('active');
+            const isActive = this.classList.toggle('active');
             navMenu.classList.toggle('active');
+            
+            // Update ARIA attributes
+            this.setAttribute('aria-expanded', isActive);
+            navMenu.setAttribute('aria-hidden', !isActive);
         });
         
         // Close menu when clicking outside
@@ -379,6 +386,8 @@ function initMobileMenu() {
             if (!mobileMenu.contains(e.target) && !navMenu.contains(e.target)) {
                 mobileMenu.classList.remove('active');
                 navMenu.classList.remove('active');
+                mobileMenu.setAttribute('aria-expanded', 'false');
+                navMenu.setAttribute('aria-hidden', 'true');
             }
         });
         
@@ -387,6 +396,8 @@ function initMobileMenu() {
             if (e.key === 'Escape') {
                 mobileMenu.classList.remove('active');
                 navMenu.classList.remove('active');
+                mobileMenu.setAttribute('aria-expanded', 'false');
+                navMenu.setAttribute('aria-hidden', 'true');
             }
         });
     }
@@ -513,16 +524,34 @@ window.addEventListener('error', function(e) {
     // You can implement error reporting here
 });
 
-// Progressive Web App support (if needed)
+// Progressive Web App support with improved error handling
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker.register('/sw.js')
             .then(function(registration) {
-                console.log('ServiceWorker registration successful');
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                
+                // Check for updates
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            // New content available, show update notification
+                            showNotification('New content available! Refresh the page to update.', 'info');
+                        }
+                    });
+                });
             })
             .catch(function(err) {
-                console.log('ServiceWorker registration failed');
+                console.log('ServiceWorker registration failed: ', err);
             });
+            
+        // Listen for service worker messages
+        navigator.serviceWorker.addEventListener('message', event => {
+            if (event.data && event.data.type === 'CACHE_UPDATED') {
+                showNotification('App updated! New content is available.', 'success');
+            }
+        });
     });
 }
 
