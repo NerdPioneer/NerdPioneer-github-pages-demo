@@ -1284,6 +1284,35 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
 }
 
+/* AWS Category Styling */
+.aws-category {
+    background: linear-gradient(135deg, #ff9900 0%, #ffa500 50%, #ff9900 100%);
+    background-size: 200% 200%;
+    animation: awsGradient 3s ease infinite;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 8px 32px rgba(255, 153, 0, 0.2);
+    border: 1px solid rgba(255, 153, 0, 0.3);
+}
+
+.aws-category h3 {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1.5rem;
+}
+
+.aws-category h3 i {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes awsGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 @media (max-width: 768px) {
     .certifications-grid {
         grid-template-columns: 1fr;
