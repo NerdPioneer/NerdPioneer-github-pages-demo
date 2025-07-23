@@ -212,19 +212,19 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
     position: relative;
     overflow: hidden;
-    padding-top: 80px; /* Add padding to account for fixed navbar */
+    padding-top: 15vh; /* Increased spacing from navbar - 15% of viewport height */
 }
 
 .hero-image-placeholder {
-    width: 200px;
-    height: 200px;
+    width: 500px;
+    height: 500px;
     background: white;
     border-radius: 12px;
-    margin: 10vh auto 2rem;
-    display: flex;
+    margin: 0 auto;
+    display: flex; /* Show on desktop now */
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0, 0, 0, 0.1);
     border: 3px solid rgba(255, 255, 255, 0.8);
     position: relative;
 }
@@ -262,10 +262,126 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
 }
 
+.hero-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .hero-title {
     font-size: 3.5rem;
     margin-bottom: 1rem;
     line-height: 1.2;
+}
+
+/* Glitch Effect for Hero Title */
+.glitch-effect {
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 800;
+    animation: glitch-main 2s infinite;
+}
+
+.glitch-effect::before,
+.glitch-effect::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-effect::before {
+    animation: glitch-1 0.5s infinite;
+    color: #ff0040;
+    z-index: -1;
+}
+
+.glitch-effect::after {
+    animation: glitch-2 0.5s infinite;
+    color: #00ff40;
+    z-index: -2;
+}
+
+@keyframes glitch-main {
+    0%, 92%, 100% { transform: translate(0); }
+    1% { transform: translate(-2px, 1px); }
+    2% { transform: translate(2px, -1px); }
+    3% { transform: translate(-1px, 2px); }
+    4% { transform: translate(1px, -2px); }
+    5% { transform: translate(-2px, -1px); }
+    94% { transform: translate(2px, 1px); }
+    95% { transform: translate(-1px, -1px); }
+    96% { transform: translate(1px, 2px); }
+}
+
+@keyframes glitch-1 {
+    0%, 92%, 100% { transform: translate(0); }
+    1% { transform: translate(2px, -1px); }
+    2% { transform: translate(-2px, 2px); }
+    3% { transform: translate(1px, 1px); }
+    4% { transform: translate(-1px, -1px); }
+    5% { transform: translate(2px, 2px); }
+    94% { transform: translate(-2px, -1px); }
+    95% { transform: translate(1px, 1px); }
+    96% { transform: translate(-1px, 2px); }
+}
+
+@keyframes glitch-2 {
+    0%, 92%, 100% { transform: translate(0); }
+    1% { transform: translate(-1px, 2px); }
+    2% { transform: translate(1px, -2px); }
+    3% { transform: translate(2px, 1px); }
+    4% { transform: translate(-2px, -1px); }
+    5% { transform: translate(1px, -1px); }
+    94% { transform: translate(1px, -2px); }
+    95% { transform: translate(-2px, 1px); }
+    96% { transform: translate(2px, -1px); }
+}
+
+/* TV Static Effect on Hover */
+.glitch-effect:hover {
+    animation: tv-static 0.3s infinite, glitch-main 2s infinite;
+}
+
+@keyframes tv-static {
+    0% { 
+        text-shadow: 
+            1px 0 0 #ff0040,
+            -1px 0 0 #00ff40,
+            0 1px 0 #0040ff,
+            0 -1px 0 #ff4000;
+    }
+    25% { 
+        text-shadow: 
+            -1px 0 0 #ff0040,
+            1px 0 0 #00ff40,
+            0 -1px 0 #0040ff,
+            0 1px 0 #ff4000;
+    }
+    50% { 
+        text-shadow: 
+            0 1px 0 #ff0040,
+            0 -1px 0 #00ff40,
+            1px 0 0 #0040ff,
+            -1px 0 0 #ff4000;
+    }
+    75% { 
+        text-shadow: 
+            0 -1px 0 #ff0040,
+            0 1px 0 #00ff40,
+            -1px 0 0 #0040ff,
+            1px 0 0 #ff4000;
+    }
+    100% { 
+        text-shadow: 
+            1px 1px 0 #ff0040,
+            -1px -1px 0 #00ff40,
+            1px -1px 0 #0040ff,
+            -1px 1px 0 #ff4000;
+    }
 }
 
 .highlight {
@@ -333,6 +449,7 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    display: none; /* Hidden on desktop */
 }
 
 .profile-avatar {
@@ -467,7 +584,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* About Section */
 .about {
-    padding: 3rem 0 5vh;
+    padding: 6rem 0 6rem;
     background: white;
 }
 
@@ -1243,6 +1360,11 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .hero-image-placeholder {
+        width: 400px;
+        height: 400px;
+    }
+    
+    .hero-image-placeholder {
         width: 180px;
         height: 180px;
         margin-bottom: 1.5rem;
@@ -1304,9 +1426,10 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .hero-image-placeholder {
-        width: 150px;
-        height: 150px;
+        width: 300px;
+        height: 300px;
         margin-bottom: 1.5rem;
+        display: flex; /* Show on mobile */
     }
     
     .hero-image-placeholder::after {
@@ -1377,6 +1500,7 @@ h1, h2, h3, h4, h5, h6 {
 
     .profile-card {
         padding: 2rem;
+        display: block; /* Show on mobile */
     }
 
     .profile-avatar {
@@ -1407,9 +1531,10 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .hero-image-placeholder {
-        width: 120px;
-        height: 120px;
+        width: 250px;
+        height: 250px;
         margin-bottom: 1rem;
+        display: flex; /* Show on small mobile */
     }
     
     .hero-image-placeholder::after {
@@ -1524,6 +1649,7 @@ h1, h2, h3, h4, h5, h6 {
     
     .profile-card {
         padding: 1.5rem;
+        display: block; /* Show on landscape mobile */
     }
     
     .profile-avatar {
