@@ -292,8 +292,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-image-placeholder {
-    width: 400px;
-    height: 400px;
+    width: 750px;
+    height: 750px;
     background: white;
     border-radius: 12px;
     margin: 0 auto;
@@ -1511,6 +1511,72 @@ h1, h2, h3, h4, h5, h6 {
     100% { background-position: 0% 50%; }
 }
 
+/* LinkedIn Profile Link Styling */
+.linkedin-link-container {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(226, 232, 240, 0.3);
+}
+
+.linkedin-profile-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 119, 181, 0.3);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.linkedin-profile-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.linkedin-profile-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
+    background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+}
+
+.linkedin-profile-btn:hover::before {
+    left: 100%;
+}
+
+.linkedin-profile-btn:focus {
+    outline: 3px solid rgba(0, 119, 181, 0.5);
+    outline-offset: 2px;
+}
+
+.linkedin-profile-btn .fab.fa-linkedin {
+    font-size: 1.2rem;
+}
+
+.linkedin-profile-btn .fas.fa-external-link-alt {
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+.linkedin-profile-btn:hover .fas.fa-external-link-alt {
+    transform: translateX(2px) translateY(-2px);
+    opacity: 1;
+}
+
 @media (max-width: 768px) {
     .certifications-grid {
         grid-template-columns: 1fr;
@@ -1529,6 +1595,21 @@ h1, h2, h3, h4, h5, h6 {
     
     .cert-info h4 {
         font-size: 1.1rem;
+    }
+    
+    .linkedin-link-container {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+    }
+    
+    .linkedin-profile-btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.9rem;
+        gap: 0.5rem;
+    }
+    
+    .linkedin-profile-btn span {
+        font-size: 0.875rem;
     }
 }
 
@@ -1742,8 +1823,8 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .hero-image-placeholder {
-        width: 300px;
-        height: 300px;
+        width: 500px;
+        height: 500px;
     }
     
     .hero-title {
@@ -1802,8 +1883,8 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .hero-image-placeholder {
-        width: 300px;
-        height: 300px;
+        width: 350px;
+        height: 350px;
         margin-bottom: 1.5rem;
         display: flex; /* Show on mobile */
     }
@@ -1923,8 +2004,8 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .hero-image-placeholder {
-        width: 200px;
-        height: 200px;
+        width: 280px;
+        height: 280px;
         margin: 1rem auto 1rem;
         display: flex; /* Show on small mobile */
     }
