@@ -691,16 +691,6 @@ function createBlogPostElement(item) {
         imageHtml = `<div class="blog-image"><i class="fas fa-newspaper"></i></div>`;
     }
     
-    // Create tags HTML (limit to 2 tags)
-    let tagsHtml = '';
-    if (categories.length > 0) {
-        const tagList = Array.from(categories)
-            .slice(0, 2)
-            .map(cat => `<span class="blog-tag">${cat.textContent}</span>`)
-            .join('');
-        tagsHtml = `<div class="blog-tags">${tagList}</div>`;
-    }
-    
     postElement.innerHTML = `
         ${imageHtml}
         <div class="blog-content-wrapper">
@@ -715,22 +705,11 @@ function createBlogPostElement(item) {
                     <span>${readingTime} min read</span>
                 </div>
             </div>
-            ${tagsHtml}
             <p class="blog-excerpt">${excerpt}</p>
             <div class="blog-actions">
                 <a href="${link}" target="_blank" rel="noopener noreferrer" class="read-more">
                     Read Article <i class="fas fa-external-link-alt"></i>
                 </a>
-                <div class="social-links">
-                    <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(link)}&text=${encodeURIComponent(title)}" 
-                       target="_blank" rel="noopener noreferrer" class="social-link" title="Share on Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(link)}" 
-                       target="_blank" rel="noopener noreferrer" class="social-link" title="Share on LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                </div>
             </div>
         </div>
     `;
