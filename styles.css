@@ -1284,30 +1284,95 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
 }
 
+.cert-status.expired {
+    background: #ef4444;
+    color: white;
+}
+
+/* CompTIA Category Styling */
+.comptia-category {
+    background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, rgba(255, 0, 0, 0.15) 50%, rgba(229, 9, 20, 0.1) 100%);
+    background-size: 200% 200%;
+    animation: comptiaGradient 3s ease infinite;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 16px rgba(229, 9, 20, 0.1);
+    border: 1px solid rgba(229, 9, 20, 0.2);
+}
+
+.comptia-category h3 {
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+}
+
+.comptia-category h3 i {
+    color: #e50914;
+}
+
+@keyframes comptiaGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 /* AWS Category Styling */
 .aws-category {
-    background: linear-gradient(135deg, #ff9900 0%, #ffa500 50%, #ff9900 100%);
+    background: linear-gradient(135deg, rgba(255, 153, 0, 0.1) 0%, rgba(255, 165, 0, 0.15) 50%, rgba(255, 153, 0, 0.1) 100%);
     background-size: 200% 200%;
     animation: awsGradient 3s ease infinite;
     border-radius: 16px;
     padding: 2rem;
     margin-top: 2rem;
-    box-shadow: 0 8px 32px rgba(255, 153, 0, 0.2);
-    border: 1px solid rgba(255, 153, 0, 0.3);
+    box-shadow: 0 4px 16px rgba(255, 153, 0, 0.1);
+    border: 1px solid rgba(255, 153, 0, 0.2);
 }
 
 .aws-category h3 {
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: #1e293b;
     margin-bottom: 1.5rem;
 }
 
 .aws-category h3 i {
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: #ff9900;
 }
 
 @keyframes awsGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Microsoft Category Styling */
+.microsoft-category {
+    background: linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, rgba(40, 120, 255, 0.15) 50%, rgba(0, 120, 212, 0.1) 100%);
+    background-size: 200% 200%;
+    animation: microsoftGradient 3s ease infinite;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 120, 212, 0.1);
+    border: 1px solid rgba(0, 120, 212, 0.2);
+}
+
+.microsoft-category h3 {
+    color: #1e293b;
+    margin-bottom: 1rem;
+}
+
+.microsoft-category h3 i {
+    color: #0078d4;
+}
+
+.microsoft-subtitle {
+    text-align: center;
+    font-style: italic;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+@keyframes microsoftGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
