@@ -303,7 +303,7 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
     position: relative;
     overflow: hidden;
-    padding: 25vh 0; /* 25% top and bottom padding for centering */
+    padding: 10vh 0; /* Reduced from 25vh to 10vh for better button visibility */
 }
 
 .hero-image-placeholder {
@@ -1915,7 +1915,7 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .hero {
-        padding: 18vh 0 15vh 0; /* Optimized tablet padding */
+        padding: 8vh 0 6vh 0; /* Reduced tablet padding for better button visibility */
         padding-top: 80px; /* Adjust for smaller navbar on tablets */
     }
     
@@ -1981,7 +1981,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .hero {
-        padding: 10vh 0 8vh 0; /* Optimized mobile padding - less top, more bottom */
+        padding: 6vh 0 4vh 0; /* Reduced mobile padding for immediate button visibility */
         padding-top: 80px; /* Ensure navbar doesn't cover content */
         min-height: calc(100vh - 80px);
     }
@@ -2098,9 +2098,9 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 480px) {
     .hero {
-        padding: 8vh 0 6vh 0; /* Further optimized padding for small mobile */
-        padding-top: 80px;
-        min-height: calc(100vh - 80px);
+        padding: 4vh 0 3vh 0; /* Minimal padding for immediate button visibility */
+        padding-top: 70px;
+        min-height: calc(100vh - 70px);
     }
     
     .hero-container {
@@ -2259,8 +2259,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Ultra-small screens (320px and below) */
 @media (max-width: 320px) {
     .hero {
-        padding: 6vh 0 4vh 0; /* Minimal padding for ultra-small screens */
-        padding-top: 70px;
+        padding: 3vh 0 2vh 0; /* Absolute minimal padding for ultra-small screens */
+        padding-top: 60px;
     }
     
     .hero-container {
