@@ -9,7 +9,7 @@ As a student in cloud computing and emerging technologies, I created this templa
 	•	Develop a clean and modern online portfolio without worrying about WordPress maintenance
 	•	Leverage GitHub Pages for free, fast, and version-controlled web hosting
 
-Key Features
+**Key Features**
 1. Static Website – No server-side code, making it fast and secure
 2. Project Showcase – Highlight academic and personal work to impress recruiters
 3. Resume Integration – Link or embed your professional resume
@@ -19,8 +19,9 @@ Key Features
 **Why Students Should Build a Portfolio**
 
 Whether you’re looking for internships, applying to grad school, or entering the job market, having a portfolio:
-	•	Shows initiative – Demonstrates that you’re proactive about your career
-	•	Documents growth – Tracks your progress and learning over time
-	•	Improves visibility – Makes it easier for recruiters to find and evaluate you
-	•	Supports applications – Provides a professional, sharable link in resumes, LinkedIn, and emails
-	•	Encourages project-building – Motivates you to work on real-world challenges and build credibility
+
+1. Shows initiative – Demonstrates that you’re proactive about your career and you take yourself seriously. 
+2. Documents growth – Tracks your progress and learning over time, its always fun to look back on the progress you made over the year.
+3. Improves visibility – Makes it easier for recruiters to find and evaluate you.
+4. Supports applications – Provides a professional, sharable link in resumes, LinkedIn, and emails.
+5. Encourages project-building – Motivates you to work on real-world challenges and build credibility for yourself. 
