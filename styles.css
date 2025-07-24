@@ -167,6 +167,12 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 0.5px;
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    min-width: 200px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
 }
 
 .hero-cta:hover {
@@ -306,28 +312,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 10vh 0; /* Reduced from 25vh to 10vh for better button visibility */
 }
 
-.hero-image-placeholder {
-    width: 750px;
-    height: 750px;
-    background: white;
-    border-radius: 12px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0, 0, 0, 0.1);
-    border: 3px solid rgba(255, 255, 255, 0.8);
-    position: relative;
-}
-
-.hero-image-placeholder::after {
-    content: 'Your Image Here';
-    color: #64748b;
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-align: center;
-}
-
 .hero::before {
     content: '';
     position: absolute;
@@ -350,10 +334,11 @@ h1, h2, h3, h4, h5, h6 {
 .hero-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 4rem 2rem;
+    grid-template-rows: 1fr;
+    gap: 4rem;
     align-items: start;
     margin-bottom: 3rem;
+    min-height: 500px;
 }
 
 .hero-text {
@@ -362,6 +347,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-self: center;
 }
 
 .hero-image {
@@ -371,6 +357,7 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    align-self: start;
 }
 
 .profile-image {
@@ -503,28 +490,20 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     gap: 1.5rem;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 
 .hero-text {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    align-self: start;
 }
 
 .hero-image {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.hero-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    justify-content: center;
-    margin-top: 2rem;
 }
 
 .hero-social-links {
@@ -2128,16 +2107,12 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 1024px) {
     .hero-content {
         gap: 3rem;
+        min-height: 400px;
     }
     
     .hero {
         padding: 8vh 0 6vh 0; /* Reduced tablet padding for better button visibility */
         padding-top: 80px; /* Adjust for smaller navbar on tablets */
-    }
-    
-    .hero-image-placeholder {
-        width: 500px;
-        height: 500px;
     }
     
     .profile-image {
@@ -2205,17 +2180,6 @@ h1, h2, h3, h4, h5, h6 {
         padding: 6vh 0 4vh 0; /* Reduced mobile padding for immediate button visibility */
         padding-top: 80px; /* Ensure navbar doesn't cover content */
         min-height: calc(100vh - 80px);
-    }
-    
-    .hero-image-placeholder {
-        width: 350px;
-        height: 350px;
-        margin-bottom: 1.5rem;
-        display: flex; /* Show on mobile */
-    }
-    
-    .hero-image-placeholder::after {
-        font-size: 0.8rem;
     }
 
     .hero-content {
@@ -2344,13 +2308,6 @@ h1, h2, h3, h4, h5, h6 {
         padding: 0 15px; /* Reduced side padding for more space */
     }
     
-    .hero-image-placeholder {
-        width: 250px; /* Smaller image for better fit */
-        height: 250px;
-        margin: 0.5rem auto 1rem;
-        display: flex; /* Show on small mobile */
-    }
-    
     .profile-image {
         width: 250px;
         height: 250px;
@@ -2362,11 +2319,6 @@ h1, h2, h3, h4, h5, h6 {
         height: 250px;
         margin: 0.5rem auto 1rem;
         border-radius: 16px;
-    }
-    
-    .hero-image-placeholder::after {
-        font-size: 0.7rem;
-        line-height: 1.2;
     }
 
     .hero-social-links {
@@ -2521,12 +2473,6 @@ h1, h2, h3, h4, h5, h6 {
     .hero-container {
         padding: 0 10px; /* Minimal side padding */
      }
-    
-    .hero-image-placeholder {
-        width: 200px; /* Even smaller for ultra-small screens */
-        height: 200px;
-        margin: 0.25rem auto 0.75rem;
-    }
     
     .profile-image {
         width: 200px;
