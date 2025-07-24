@@ -778,21 +778,32 @@ document.addEventListener('DOMContentLoaded', function() {
 // Profile Image Carousel
 function initProfileCarousel() {
     const images = document.querySelectorAll('.profile-image');
-    if (images.length === 0) return;
+    console.log('Profile carousel: Found', images.length, 'images');
+    if (images.length === 0) {
+        console.warn('No profile images found for carousel');
+        return;
+    }
     
     let currentIndex = 0;
     const totalImages = images.length;
     let carouselInterval;
     
     // Preload all images for smooth transitions
-    images.forEach(img => {
+    images.forEach((img, index) => {
         const imageUrl = img.src;
         const preloadImg = new Image();
         preloadImg.src = imageUrl;
+        console.log(`Preloading image ${index + 1}:`, imageUrl);
     });
+    
+    // Ensure first image is visible
+    images[0].classList.add('active');
+    console.log('Profile carousel initialized with', totalImages, 'images');
     
     // Function to show the next image with smooth transition
     function showNextImage() {
+        console.log(`Transitioning from image ${currentIndex + 1} to ${((currentIndex + 1) % totalImages) + 1}`);
+        
         // Add glow effect to current image before transition
         const currentImage = images[currentIndex];
         currentImage.style.animation = 'profileGlow 0.8s ease-in-out';
@@ -819,10 +830,12 @@ function initProfileCarousel() {
     
     // Start the carousel - change image every 4 seconds
     function startCarousel() {
+        console.log('Starting profile carousel');
         carouselInterval = setInterval(showNextImage, 4000);
     }
     
     function stopCarousel() {
+        console.log('Stopping profile carousel');
         if (carouselInterval) {
             clearInterval(carouselInterval);
         }
