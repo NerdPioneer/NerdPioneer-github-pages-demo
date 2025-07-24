@@ -541,7 +541,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
     margin-bottom: 1rem;
     line-height: 1.2;
-    text-align: center;
+    text-align: left;
 }
 
 .hero-title:focus {
@@ -667,7 +667,7 @@ h1, h2, h3, h4, h5, h6 {
         overflow: hidden;
         display: inline-block;
         width: 100%;
-        text-align: center;
+        text-align: left;
     }
     
     .glitch-effect::before,
@@ -722,7 +722,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1.5rem;
     color: #e2e8f0;
     font-weight: 500;
-    text-align: center;
+    text-align: left;
 }
 
 .hero-description {
@@ -730,7 +730,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 2.5rem;
     color: #cbd5e1;
     line-height: 1.7;
-    text-align: center;
+    text-align: left;
 }
 
 .hero-social {
@@ -1414,174 +1414,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .project-link:hover {
     color: #764ba2;
-}
-
-/* GitHub Section */
-.github-section {
-    padding: 6rem 0;
-    background: white;
-    border-top: 1px solid #e2e8f0;
-}
-
-.github-content {
-    margin-top: 3rem;
-}
-
-.github-stats {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 3rem;
-    align-items: start;
-}
-
-.github-card {
-    background: #f8fafc;
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e2e8f0;
-    height: fit-content;
-    transition: all 0.3s ease;
-}
-
-.github-card:hover {
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-    transform: translateY(-2px);
-}
-
-.github-card-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.github-card-header i {
-    font-size: 2rem;
-    color: #333;
-}
-
-.github-card-header h3 {
-    color: #1e293b;
-    font-size: 1.5rem;
-    margin: 0;
-}
-
-.github-card-body p {
-    color: #64748b;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-}
-
-.github-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.btn-github {
-    background: #333;
-    color: white;
-    border: 2px solid #333;
-    padding: 0.8rem 1.5rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-}
-
-.btn-github:hover {
-    background: #555;
-    border-color: #555;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(51, 51, 51, 0.3);
-}
-
-.github-highlights h3 {
-    color: #1e293b;
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.github-highlights h3 i {
-    color: #667eea;
-}
-
-.repo-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.repo-item {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    border: 1px solid #e2e8f0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-.repo-item:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
-}
-
-.repo-info h4 {
-    color: #1e293b;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.repo-info h4 i {
-    color: #667eea;
-    font-size: 1rem;
-}
-
-.repo-info p {
-    color: #64748b;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-}
-
-.repo-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.repo-tags span {
-    background: #f1f5f9;
-    color: #475569;
-    padding: 0.2rem 0.6rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 500;
-}
-
-.repo-link {
-    color: #667eea;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-    padding: 0.5rem;
-    border-radius: 6px;
-}
-
-.repo-link:hover {
-    color: #764ba2;
-    background: #f1f5f9;
 }
 
 /* Skills Section */
@@ -2373,10 +2205,10 @@ h1, h2, h3, h4, h5, h6 {
     .hero-content {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         gap: 1.5rem; /* Reduced gap for better mobile fit */
         margin-bottom: 1.5rem;
-        text-align: center;
+        text-align: left;
     }
 
     .hero-image {
@@ -2436,32 +2268,6 @@ h1, h2, h3, h4, h5, h6 {
 
     .projects-grid {
         grid-template-columns: 1fr;
-    }
-
-    .github-stats {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .github-actions {
-        flex-direction: column;
-        gap: 0.8rem;
-    }
-
-    .github-actions .btn {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .repo-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-
-    .repo-link {
-        align-self: flex-end;
-        margin-top: 0.5rem;
     }
 
     .project-actions {
@@ -2684,6 +2490,61 @@ h1, h2, h3, h4, h5, h6 {
     .floating-atom {
         font-size: 1.5rem;
         opacity: 0.4;
+    }
+}
+
+/* iPhone 14 Pro Max and similar large mobile devices (428px wide, 932px tall) */
+@media (max-width: 430px) and (min-height: 900px) {
+    .hero {
+        padding: 8vh 0 5vh 0;
+        padding-top: 160px; /* Extra padding for tall screens to clear navbar */
+        min-height: calc(100vh - 100px);
+    }
+    
+    .hero-content {
+        gap: 2.5rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .hero-title {
+        font-size: 2.2rem; /* Slightly larger for tall screens */
+        margin-bottom: 1.2rem;
+        line-height: 1.1;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.15rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+    
+    .profile-image {
+        width: 300px;
+        height: 300px;
+        margin: 1.5rem auto 2rem;
+    }
+    
+    .profile-carousel {
+        width: 300px;
+        height: 300px;
+        margin: 1.5rem auto 2rem;
+    }
+    
+    .hero-buttons {
+        margin-top: 2rem;
+        gap: 1.5rem;
+    }
+}
+
+/* Additional fix for very tall mobile screens */
+@media (max-width: 768px) and (min-height: 850px) {
+    .hero {
+        padding-top: 140px; /* More padding for tall mobile screens */
     }
 }
 
