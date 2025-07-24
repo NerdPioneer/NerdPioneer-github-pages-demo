@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu
     initMobileMenu();
     
-    // Navbar scroll effect
-    initNavbarScroll();
+    // Navbar scroll effect - commented out for static navbar
+    // initNavbarScroll();
     
     // Typing animation
     initTypingAnimation();
@@ -407,6 +407,8 @@ function initMobileMenu() {
 }
 
 // Navbar scroll effect
+// Navbar scroll functionality - commented out for static navbar
+/*
 function initNavbarScroll() {
     const navbar = document.getElementById('navbar');
     
@@ -420,6 +422,7 @@ function initNavbarScroll() {
         });
     }
 }
+*/
 
 // Typing animation for hero section
 function initTypingAnimation() {
