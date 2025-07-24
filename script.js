@@ -32,6 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Typing animation
     initTypingAnimation();
+    
+    // Profile image carousel
+    initProfileCarousel();
 });
 
 // Navigation functionality
@@ -769,5 +772,84 @@ function displayErrorMessage(message = 'Unable to load blog posts at this time.'
 // Initialize Medium feed when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Small delay to ensure other scripts have loaded
-    setTimeout(initMediumFeed, 1000);
+    setTimeout(fetchMediumPosts, 1000);
 });
+
+// Profile Image Carousel
+function initProfileCarousel() {
+    const images = document.querySelectorAll('.profile-image');
+    if (images.length === 0) return;
+    
+    let currentIndex = 0;
+    const totalImages = images.length;
+    let carouselInterval;
+    
+    // Preload all images for smooth transitions
+    images.forEach(img => {
+        const imageUrl = img.src;
+        const preloadImg = new Image();
+        preloadImg.src = imageUrl;
+    });
+    
+    // Function to show the next image with smooth transition
+    function showNextImage() {
+        // Add glow effect to current image before transition
+        const currentImage = images[currentIndex];
+        currentImage.style.animation = 'profileGlow 0.8s ease-in-out';
+        
+        // Fade out current image
+        setTimeout(() => {
+            currentImage.classList.remove('active');
+        }, 200);
+        
+        // Move to next image
+        currentIndex = (currentIndex + 1) % totalImages;
+        const nextImage = images[currentIndex];
+        
+        // Fade in new image with slight delay for smooth transition
+        setTimeout(() => {
+            nextImage.classList.add('active');
+        }, 500);
+        
+        // Reset animation after transition
+        setTimeout(() => {
+            images.forEach(img => img.style.animation = 'none');
+        }, 1300);
+    }
+    
+    // Start the carousel - change image every 4 seconds
+    function startCarousel() {
+        carouselInterval = setInterval(showNextImage, 4000);
+    }
+    
+    function stopCarousel() {
+        if (carouselInterval) {
+            clearInterval(carouselInterval);
+        }
+    }
+    
+    // Initialize carousel
+    startCarousel();
+    
+    // Pause carousel on hover for better user experience
+    const carousel = document.querySelector('.profile-carousel');
+    if (carousel) {
+        carousel.addEventListener('mouseenter', stopCarousel);
+        carousel.addEventListener('mouseleave', startCarousel);
+        
+        // Also pause on touch for mobile devices
+        carousel.addEventListener('touchstart', stopCarousel);
+        carousel.addEventListener('touchend', () => {
+            setTimeout(startCarousel, 2000); // Resume after 2 seconds on mobile
+        });
+    }
+    
+    // Reduce motion for users who prefer it
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        stopCarousel();
+        // Show all images with opacity for accessibility
+        images.forEach((img, index) => {
+            if (index === 0) img.classList.add('active');
+        });
+    }
+}
