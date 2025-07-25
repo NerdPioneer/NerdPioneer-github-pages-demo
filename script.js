@@ -3,9 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Navigation functionality
     initNavigation();
     
-    // Mobile menu
-    initMobileMenu();
-    
     // Smooth scrolling
     initSmoothScrolling();
     
@@ -23,12 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Intersection Observer for animations
     initScrollAnimations();
-    
-    // Mobile menu
-    initMobileMenu();
-    
-    // Navbar scroll effect - commented out for static navbar
-    // initNavbarScroll();
     
     // Typing animation
     initTypingAnimation();
@@ -369,53 +360,8 @@ function initScrollAnimations() {
     });
 }
 
-// Dropdown menu functionality
-function initMobileMenu() {
-    const menuBtn = document.getElementById('nav-menu-btn');
-    const dropdownContent = document.getElementById('nav-dropdown-content');
-    
-    if (menuBtn && dropdownContent) {
-        // Toggle dropdown on button click
-        menuBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const isOpen = dropdownContent.classList.contains('show');
-            
-            if (isOpen) {
-                dropdownContent.classList.remove('show');
-                menuBtn.setAttribute('aria-expanded', 'false');
-            } else {
-                dropdownContent.classList.add('show');
-                menuBtn.setAttribute('aria-expanded', 'true');
-            }
-        });
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!menuBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
-                dropdownContent.classList.remove('show');
-                menuBtn.setAttribute('aria-expanded', 'false');
-            }
-        });
-        
-        // Close dropdown when clicking on links
-        const dropdownLinks = dropdownContent.querySelectorAll('.nav-dropdown-link');
-        dropdownLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                dropdownContent.classList.remove('show');
-                menuBtn.setAttribute('aria-expanded', 'false');
-            });
-        });
-        
-        // Close dropdown on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && dropdownContent.classList.contains('show')) {
-                dropdownContent.classList.remove('show');
-                menuBtn.setAttribute('aria-expanded', 'false');
-                menuBtn.focus();
-            }
-        });
-    }
-}
+// Back to top button
+function initBackToTop() {
 
 // Navbar scroll functionality - commented out for static navbar
 /*
