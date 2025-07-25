@@ -12,8 +12,8 @@ As a student in cloud computing and emerging technologies, I created this templa
 **Key Features**
 1. Static Website – No server-side code, making it fast and secure
 2. Project Showcase – Highlight academic and personal work to impress recruiters
-3. Resume Integration – Link or embed your professional resume
-4. Contact Section – Let others easily get in touch
+3. Resume Integration – Link or embed your professional resume - remember PII (optional) 
+4. Contact Section – Let others easily get in touch - I wouldn't but hey if you are open to spam. 
 5. Customizable Sections – Courses, certifications, blog, and more
 
 **Why Students Should Build a Portfolio**
