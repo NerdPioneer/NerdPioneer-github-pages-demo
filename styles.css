@@ -1971,6 +1971,7 @@ section.blog .section-subtitle,
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 
@@ -2020,49 +2021,6 @@ section.blog .section-subtitle,
 
 .blog-cta-btn:hover::before {
     left: 100%;
-}
-
-.blog-cta-btn i {
-    position: relative;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: rgba(248, 250, 252, 0.1);
-    border: 2px solid rgba(248, 250, 252, 0.3);
-    border-radius: 8px;
-    margin-right: 0.5rem;
-    box-shadow: 0 4px 15px rgba(248, 250, 252, 0.1);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    overflow: hidden;
-}
-
-.blog-cta-btn i::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(248, 250, 252, 0.3),
-        transparent
-    );
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite;
-    border-radius: 8px;
-}
-
-.blog-cta-btn:hover i {
-    background: rgba(248, 250, 252, 0.15);
-    border-color: rgba(248, 250, 252, 0.5);
-    box-shadow: 0 6px 20px rgba(248, 250, 252, 0.2);
-    transform: scale(1.05);
 }
 
 .blog-cta-btn span,
