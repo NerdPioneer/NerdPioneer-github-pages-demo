@@ -1,8 +1,5 @@
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Navigation functionality
-    initNavigation();
-    
     // Smooth scrolling
     initSmoothScrolling();
     
@@ -28,34 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initProfileCarousel();
 });
 
-// Navigation functionality
-function initNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('section[id]');
-    
-    // Update active nav link based on scroll position
-    function updateActiveNavLink() {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.scrollY >= (sectionTop - 200)) {
-                current = section.getAttribute('id');
-            }
-        });
-        
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
-        });
-    }
-    
-    window.addEventListener('scroll', updateActiveNavLink);
-    updateActiveNavLink(); // Initial call
-}
-
 // Smooth scrolling for navigation links
 function initSmoothScrolling() {
     const navLinks = document.querySelectorAll('a[href^="#"]');
@@ -74,20 +43,12 @@ function initSmoothScrolling() {
                     behavior: 'smooth'
                 });
             } else if (targetSection) {
-                const navbarHeight = document.querySelector('.navbar').offsetHeight;
-                const targetPosition = targetSection.offsetTop - navbarHeight;
-                
+                // Scroll to section without navbar offset since navbar is removed
                 window.scrollTo({
-                    top: targetPosition,
+                    top: targetSection.offsetTop,
                     behavior: 'smooth'
                 });
             }
-            
-            // Close mobile menu if open
-            const navMenu = document.querySelector('.nav-menu');
-            const navToggle = document.querySelector('.nav-toggle');
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
         });
     });
 }
@@ -359,9 +320,6 @@ function initScrollAnimations() {
         observer.observe(element);
     });
 }
-
-// Back to top button
-function initBackToTop() {
 
 // Navbar scroll functionality - commented out for static navbar
 /*
