@@ -227,70 +227,89 @@ h1, h2, h3, h4, h5, h6 {
     color: #667eea;
 }
 
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-.nav-link {
-    color: #64748b;
-    text-decoration: none;
-    font-weight: 500;
-    font-family: 'Raleway', sans-serif;
-    transition: color 0.3s ease;
+/* Dropdown Navigation */
+.nav-dropdown {
     position: relative;
+    display: inline-block;
 }
 
-.nav-link:focus {
-    outline: 2px solid #667eea;
-    outline-offset: 4px;
-    border-radius: 4px;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
+.nav-menu-btn {
     background: #667eea;
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: #667eea;
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-    width: 100%;
-}
-
-.nav-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    background: none;
+    color: white;
     border: none;
-    padding: 4px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.2);
 }
 
-.nav-toggle:focus {
+.nav-menu-btn:hover {
+    background: #5a6fd8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.nav-menu-btn:focus {
     outline: 2px solid #667eea;
     outline-offset: 2px;
-    border-radius: 4px;
 }
 
-.bar {
-    width: 25px;
-    height: 3px;
-    background: #1e293b;
-    margin: 3px 0;
-    transition: 0.3s;
-    border-radius: 2px;
+.nav-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    z-index: 1000;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    margin-top: 8px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.nav-dropdown-content.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-dropdown-link {
+    color: #1e293b;
+    padding: 16px 20px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.nav-dropdown-link:last-child {
+    border-bottom: none;
+}
+
+.nav-dropdown-link:hover {
+    background: #f8fafc;
+    color: #667eea;
+    padding-left: 24px;
+}
+
+.nav-dropdown-link i {
+    color: #667eea;
+    width: 16px;
 }
 
 /* Hero Section */
