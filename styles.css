@@ -1303,6 +1303,15 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
 .station-marker {
     position: absolute;
     top: -15px;
@@ -1383,6 +1392,26 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 4px 15px rgba(248, 250, 252, 0.1);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.station-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(248, 250, 252, 0.3),
+        transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+    border-radius: 12px;
 }
 
 .station-icon i {
@@ -1390,6 +1419,8 @@ h1, h2, h3, h4, h5, h6 {
     color: rgba(248, 250, 252, 0.9);
     text-shadow: 0 0 10px rgba(248, 250, 252, 0.3);
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .station-card:hover .station-icon {
