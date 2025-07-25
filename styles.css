@@ -1964,6 +1964,13 @@ section.blog .section-subtitle,
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -1974,6 +1981,8 @@ section.blog .section-subtitle,
 .blog-cta-btn:not(.twitter-btn):hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
 }
 
 
