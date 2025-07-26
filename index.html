@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="Content-Encoding" content="gzip">
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000">
     <title>Ezekiel Obeisun Jr. — Cloud Computing Graduate | Network Engineer</title>
     <meta name="description" content="Ezekiel Obeisun Jr. is a Cloud Computing Graduate & Network Engineer—specializing in network infrastructure, cloud security, and secure infrastructure solutions.">
     <meta name="keywords" content="Ezekiel Obeisun, Ezekiel Obeisun Jr, Cloud Computing Graduate, Network Engineer, AWS, Microsoft Azure, CompTIA Security+, Network Infrastructure, Cloud Security, CCNA">
@@ -32,14 +34,29 @@
     <meta name="twitter:description" content="Securing systems, solving complex network problems, and delivering 1% better every day.">
     
     
+    <!-- Resource hints for better performance -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     
     
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+        body{font-family:'Raleway',sans-serif;margin:0;background:#f8fafc;-webkit-font-smoothing:antialiased}
+        .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%)}
+        .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+        .hero-content{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+        .hero-title{font-size:3.5rem;font-weight:700;color:#f1f5f9;line-height:1.2;margin-bottom:1rem}
+        .hero-subtitle{font-size:1.5rem;color:#64748b;margin-bottom:1.5rem}
+        .profile-image{width:300px;height:300px;border-radius:50%;object-fit:cover}
+        @media (max-width:768px){.hero-content{grid-template-columns:1fr;text-align:center}.hero-title{font-size:2.5rem}}
+    </style>
+    
+    <!-- Main stylesheet loaded asynchronously -->
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
     
     
@@ -47,8 +64,9 @@
     <noscript><link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
     
     
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <!-- FontAwesome with optimized loading and integrity check -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
     
     
     <script type="application/ld+json">
@@ -167,9 +185,18 @@
                 </div>
                 <div class="hero-image">
                     <div class="profile-carousel">
-                        <img src="images/profile_1.jpg" alt="Ezekiel Obeisun Jr. - Cloud Computing Graduate and Network Engineer" class="profile-image active" loading="eager" />
-                        <img src="images/profile_2.jpg" alt="Ezekiel Obeisun Jr. - Cloud Computing Graduate and Network Engineer" class="profile-image" loading="lazy" />
-                        <img src="images/profile_3.jpg" alt="Ezekiel Obeisun Jr. - Cloud Computing Graduate and Network Engineer" class="profile-image" loading="lazy" />
+                        <picture>
+                            <source srcset="images/profile_1.webp" type="image/webp">
+                            <img src="images/profile_1.jpg" alt="Ezekiel Obeisun Jr. - Cloud Computing Graduate and Network Engineer" class="profile-image active" loading="eager" width="300" height="300" />
+                        </picture>
+                        <picture>
+                            <source srcset="images/profile_2.webp" type="image/webp">
+                            <img src="images/profile_2.jpg" alt="Ezekiel Obeisun Jr. - Cloud Computing Graduate and Network Engineer" class="profile-image" loading="lazy" width="300" height="300" />
+                        </picture>
+                        <picture>
+                            <source srcset="images/profile_3.webp" type="image/webp">
+                            <img src="images/profile_3.jpg" alt="Ezekiel Obeisun Jr. - Cloud Computing Graduate and Network Engineer" class="profile-image" loading="lazy" width="300" height="300" />
+                        </picture>
                     </div>
                     <div class="hero-social-links">
                         <a href="https://www.linkedin.com/in/nerdpioneer" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visit Ezekiel's LinkedIn Profile">
@@ -746,7 +773,7 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
 
