@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollAnimations();
     initTypingAnimation();
     initProfileCarousel();
+    initVisitorCounter();
 });
 function initSmoothScrolling() {
     const navLinks = document.querySelectorAll('a[href^="#"]');
@@ -572,4 +573,44 @@ function initProfileCarousel() {
             if (index === 0) img.classList.add('active');
         });
     }
+}
+
+function initVisitorCounter() {
+    const visitorCounter = document.getElementById('visitor-counter');
+    const countDisplay = document.getElementById('visitor-count');
+    
+    if (!visitorCounter || !countDisplay) {
+        console.warn('Visitor counter elements not found');
+        return;
+    }
+    
+    // Initialize visitor count
+    let visitorCount = localStorage.getItem('visitorCount');
+    let lastVisit = localStorage.getItem('lastVisit');
+    const today = new Date().toDateString();
+    
+    // Only increment if it's a new day or first visit
+    if (!visitorCount || lastVisit !== today) {
+        visitorCount = visitorCount ? parseInt(visitorCount) + 1 : 1;
+        localStorage.setItem('visitorCount', visitorCount.toString());
+        localStorage.setItem('lastVisit', today);
+    }
+    
+    // Display the count with animation
+    countDisplay.textContent = visitorCount;
+    
+    // Show/hide visitor counter based on scroll position (same logic as back-to-top)
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            visitorCounter.classList.add('visible');
+        } else {
+            visitorCounter.classList.remove('visible');
+        }
+    });
+    
+    // Add a subtle animation when the counter updates
+    setTimeout(() => {
+        visitorCounter.style.opacity = '1';
+        visitorCounter.style.transform = 'translateY(0)';
+    }, 500);
 }
