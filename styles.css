@@ -1815,6 +1815,9 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .project-card:hover {
@@ -1884,6 +1887,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .project-content {
     padding: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-content p {
@@ -1893,6 +1899,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 2rem;
     font-family: 'Raleway', 'Helvetica Neue', Helvetica, 'Helvetica CY', Arial, sans-serif;
     font-weight: 400;
+    flex: 1;
 }
 
 .project-tech {
@@ -1935,7 +1942,8 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1.5rem;
+    margin-top: auto;
+    padding-top: 1rem;
 }
 
 .project-btn-primary {
