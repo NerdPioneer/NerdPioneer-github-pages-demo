@@ -8,13 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
         initScrollAnimations();
         initTypingAnimation();
         initProfileCarousel();
-        initVisitorCounter();
     } catch (error) {
         console.error('Error initializing application:', error);
         // Fallback: at least initialize critical functions
         try {
             initBackToTop();
-            initVisitorCounter();
         } catch (fallbackError) {
             console.error('Critical initialization failed:', fallbackError);
         }
@@ -604,64 +602,5 @@ function initProfileCarousel() {
         images.forEach((img, index) => {
             if (index === 0) img.classList.add('active');
         });
-    }
-}
-
-function initVisitorCounter() {
-    const visitorCounter = document.getElementById('visitor-counter');
-    const countDisplay = document.getElementById('visitor-count');
-    
-    if (!visitorCounter || !countDisplay) {
-        console.warn('Visitor counter elements not found');
-        return;
-    }
-    
-    try {
-        // Initialize visitor count with error handling
-        let visitorCount = localStorage.getItem('visitorCount');
-        let lastVisit = localStorage.getItem('lastVisit');
-        const today = new Date().toDateString();
-        
-        // Only increment if it's a new day or first visit
-        if (!visitorCount || lastVisit !== today) {
-            visitorCount = visitorCount ? parseInt(visitorCount) + 1 : 1;
-            try {
-                localStorage.setItem('visitorCount', visitorCount.toString());
-                localStorage.setItem('lastVisit', today);
-            } catch (e) {
-                console.warn('LocalStorage not available:', e);
-                visitorCount = 1; // Fallback to 1 if localStorage fails
-            }
-        }
-        
-        // Display the count with animation
-        countDisplay.textContent = visitorCount;
-        
-        // Throttled scroll handler for better performance
-        let scrollTimeout;
-        const handleScroll = () => {
-            if (scrollTimeout) return;
-            scrollTimeout = setTimeout(() => {
-                if (window.scrollY > 300) {
-                    visitorCounter.classList.add('visible');
-                } else {
-                    visitorCounter.classList.remove('visible');
-                }
-                scrollTimeout = null;
-            }, 16); // ~60fps
-        };
-        
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        
-        // Add a subtle animation when the counter updates
-        setTimeout(() => {
-            visitorCounter.style.opacity = '1';
-            visitorCounter.style.transform = 'translateY(0)';
-        }, 500);
-        
-    } catch (error) {
-        console.error('Error initializing visitor counter:', error);
-        // Fallback: show counter with default value
-        countDisplay.textContent = '1';
     }
 }

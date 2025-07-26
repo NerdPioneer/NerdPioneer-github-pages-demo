@@ -2640,70 +2640,6 @@ section.blog .section-subtitle,
     box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
 }
 
-/* ========================================
-   VISITOR COUNTER
-   ======================================== */
-.visitor-counter {
-    position: fixed;
-    bottom: 6rem; /* Position above the back-to-top button */
-    right: 2rem;
-    background: linear-gradient(135deg, rgba(15,23,42,0.95) 0%, rgba(30,41,59,0.95) 100%);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 255, 255, 0.2);
-    border-radius: 15px;
-    padding: 1rem 1.2rem;
-    color: white;
-    font-family: 'Raleway', sans-serif;
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-    will-change: opacity, visibility, transform;
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 0 20px rgba(0, 255, 255, 0.1);
-}
-
-.visitor-counter.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.counter-content {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.9rem;
-}
-
-.counter-content i {
-    color: #00ffff;
-    font-size: 1rem;
-}
-
-.counter-label {
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 400;
-}
-
-.counter-number {
-    color: #00ffff;
-    font-weight: 600;
-    font-size: 1rem;
-    min-width: 30px;
-    text-align: center;
-}
-
-.visitor-counter:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-        0 12px 40px rgba(0, 0, 0, 0.4),
-        0 0 25px rgba(0, 255, 255, 0.15);
-}
-
-
 @media (max-width: 1024px) {
     .hero-content {
         gap: 3rem;
@@ -3863,45 +3799,7 @@ section.blog .section-subtitle,
     }
 }
 
-/* ========================================
-   VISITOR COUNTER - MOBILE RESPONSIVE
-   ======================================== */
 @media (max-width: 768px) {
-    .visitor-counter {
-        bottom: 5rem;
-        right: 1.5rem;
-        padding: 0.8rem 1rem;
-        border-radius: 12px;
-    }
-    
-    .counter-content {
-        font-size: 0.85rem;
-        gap: 0.5rem;
-    }
-    
-    .counter-content i,
-    .counter-number {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .visitor-counter {
-        bottom: 4.5rem;
-        right: 1rem;
-        padding: 0.7rem 0.9rem;
-        border-radius: 10px;
-    }
-    
-    .counter-content {
-        font-size: 0.8rem;
-        gap: 0.4rem;
-    }
-    
-    .counter-content i,
-    .counter-number {
-        font-size: 0.85rem;
-    }
     
     .counter-number {
         min-width: 25px;
@@ -3924,49 +3822,8 @@ section.blog .section-subtitle,
         padding: 0 0.75rem;
         max-width: 100%;
     }
-    
-    .visitor-counter {
-        bottom: 3.5rem;
-        right: 0.5rem;
-        padding: 0.5rem 0.7rem;
-        border-radius: 6px;
-    }
-    
-    .counter-content {
-        font-size: 0.7rem;
-        gap: 0.2rem;
-    }
-    
-    .counter-content i,
-    .counter-number {
-        font-size: 0.75rem;
-    }
 }
 
 /* Extra small screens */
 @media (max-width: 360px) {
-    .visitor-counter {
-        bottom: 4rem;
-        right: 0.8rem;
-        padding: 0.6rem 0.8rem;
-        border-radius: 8px;
-    }
-    
-    .counter-content {
-        font-size: 0.75rem;
-        gap: 0.3rem;
-    }
-    
-    .counter-content i,
-    .counter-number {
-        font-size: 0.8rem;
-    }
-    
-    .counter-label {
-        display: none; /* Hide "Visitors" text on very small screens */
-    }
-    
-    .counter-number {
-        min-width: 22px;
-    }
 }
