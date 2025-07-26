@@ -1,13 +1,35 @@
 document.addEventListener('DOMContentLoaded', function() {
-    initSmoothScrolling();
-    initProjectFiltering();
-    initSkillsAnimation();
-    initContactForm();
-    initBackToTop();
-    initScrollAnimations();
-    initTypingAnimation();
-    initProfileCarousel();
-    initVisitorCounter();
+    try {
+        initSmoothScrolling();
+        initProjectFiltering();
+        initSkillsAnimation();
+        initContactForm();
+        initBackToTop();
+        initScrollAnimations();
+        initTypingAnimation();
+        initProfileCarousel();
+        initVisitorCounter();
+    } catch (error) {
+        console.error('Error initializing application:', error);
+        // Fallback: at least initialize critical functions
+        try {
+            initBackToTop();
+            initVisitorCounter();
+        } catch (fallbackError) {
+            console.error('Critical initialization failed:', fallbackError);
+        }
+    }
+    
+    // Add global error handler
+    window.addEventListener('error', function(e) {
+        console.error('Global error:', e.error);
+    });
+    
+    // Add unhandled promise rejection handler
+    window.addEventListener('unhandledrejection', function(e) {
+        console.error('Unhandled promise rejection:', e.reason);
+        e.preventDefault(); // Prevents the default browser behavior
+    });
 });
 function initSmoothScrolling() {
     const navLinks = document.querySelectorAll('a[href^="#"]');
@@ -201,14 +223,24 @@ function hideNotification(notification) {
 function initBackToTop() {
     const backToTopBtn = document.getElementById('back-to-top');
     if (backToTopBtn) {
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
-            }
-        });
-        backToTopBtn.addEventListener('click', function() {
+        // Throttled scroll handler for better performance
+        let scrollTimeout;
+        const handleScroll = () => {
+            if (scrollTimeout) return;
+            scrollTimeout = setTimeout(() => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+                scrollTimeout = null;
+            }, 16); // ~60fps
+        };
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        backToTopBtn.addEventListener('click', function(e) {
+            e.preventDefault();
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -584,33 +616,52 @@ function initVisitorCounter() {
         return;
     }
     
-    // Initialize visitor count
-    let visitorCount = localStorage.getItem('visitorCount');
-    let lastVisit = localStorage.getItem('lastVisit');
-    const today = new Date().toDateString();
-    
-    // Only increment if it's a new day or first visit
-    if (!visitorCount || lastVisit !== today) {
-        visitorCount = visitorCount ? parseInt(visitorCount) + 1 : 1;
-        localStorage.setItem('visitorCount', visitorCount.toString());
-        localStorage.setItem('lastVisit', today);
-    }
-    
-    // Display the count with animation
-    countDisplay.textContent = visitorCount;
-    
-    // Show/hide visitor counter based on scroll position (same logic as back-to-top)
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-            visitorCounter.classList.add('visible');
-        } else {
-            visitorCounter.classList.remove('visible');
+    try {
+        // Initialize visitor count with error handling
+        let visitorCount = localStorage.getItem('visitorCount');
+        let lastVisit = localStorage.getItem('lastVisit');
+        const today = new Date().toDateString();
+        
+        // Only increment if it's a new day or first visit
+        if (!visitorCount || lastVisit !== today) {
+            visitorCount = visitorCount ? parseInt(visitorCount) + 1 : 1;
+            try {
+                localStorage.setItem('visitorCount', visitorCount.toString());
+                localStorage.setItem('lastVisit', today);
+            } catch (e) {
+                console.warn('LocalStorage not available:', e);
+                visitorCount = 1; // Fallback to 1 if localStorage fails
+            }
         }
-    });
-    
-    // Add a subtle animation when the counter updates
-    setTimeout(() => {
-        visitorCounter.style.opacity = '1';
-        visitorCounter.style.transform = 'translateY(0)';
-    }, 500);
+        
+        // Display the count with animation
+        countDisplay.textContent = visitorCount;
+        
+        // Throttled scroll handler for better performance
+        let scrollTimeout;
+        const handleScroll = () => {
+            if (scrollTimeout) return;
+            scrollTimeout = setTimeout(() => {
+                if (window.scrollY > 300) {
+                    visitorCounter.classList.add('visible');
+                } else {
+                    visitorCounter.classList.remove('visible');
+                }
+                scrollTimeout = null;
+            }, 16); // ~60fps
+        };
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        // Add a subtle animation when the counter updates
+        setTimeout(() => {
+            visitorCounter.style.opacity = '1';
+            visitorCounter.style.transform = 'translateY(0)';
+        }, 500);
+        
+    } catch (error) {
+        console.error('Error initializing visitor counter:', error);
+        // Fallback: show counter with default value
+        countDisplay.textContent = '1';
+    }
 }
