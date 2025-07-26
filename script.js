@@ -220,31 +220,56 @@ function hideNotification(notification) {
 }
 function initBackToTop() {
     const backToTopBtn = document.getElementById('back-to-top');
-    if (backToTopBtn) {
-        // Throttled scroll handler for better performance
-        let scrollTimeout;
-        const handleScroll = () => {
-            if (scrollTimeout) return;
-            scrollTimeout = setTimeout(() => {
-                if (window.scrollY > 300) {
-                    backToTopBtn.classList.add('visible');
-                } else {
-                    backToTopBtn.classList.remove('visible');
-                }
-                scrollTimeout = null;
-            }, 16); // ~60fps
-        };
-        
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        
-        backToTopBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+    if (!backToTopBtn) {
+        console.warn('Back to top button not found');
+        return;
     }
+
+    // Show button when user scrolls past the hero section (about 80vh)
+    let showThreshold = window.innerHeight * 0.8;
+    
+    // Throttled scroll handler for better performance
+    let scrollTimeout;
+    const handleScroll = () => {
+        if (scrollTimeout) return;
+        scrollTimeout = setTimeout(() => {
+            const scrollY = window.scrollY || window.pageYOffset;
+            
+            if (scrollY > showThreshold) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+            scrollTimeout = null;
+        }, 16); // ~60fps
+    };
+
+    // Initial check in case page is already scrolled
+    handleScroll();
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    backToTopBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Smooth scroll to top
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
+        // Optional: Hide button immediately on click for better UX
+        setTimeout(() => {
+            if (window.scrollY <= showThreshold) {
+                backToTopBtn.classList.remove('visible');
+            }
+        }, 100);
+    });
+
+    // Handle resize to recalculate threshold
+    window.addEventListener('resize', () => {
+        showThreshold = window.innerHeight * 0.8;
+    }, { passive: true });
 }
 function initScrollAnimations() {
     const animatedElements = document.querySelectorAll('.about-text, .about-image, .project-card, .skill-item, .contact-item');
