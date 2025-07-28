@@ -852,6 +852,8 @@ function initMusicPlayer() {
             stopSessionTimer();
         } else if (event.data == YT.PlayerState.ENDED) {
             nextTrack();
+        } else if (event.data == YT.PlayerState.ERROR) {
+            handlePlayerError('Video unavailable');
         }
     }
 
@@ -966,4 +968,26 @@ function initMusicPlayer() {
         const progressPercent = (timeElapsed / SESSION_DURATION) * 100;
         progressFill.style.width = `${Math.min(progressPercent, 100)}%`;
     }
+
+    function handlePlayerError(message) {
+        console.error('YouTube Player Error:', message);
+        trackTitle.textContent = 'Error loading track';
+        trackArtist.textContent = 'Trying next track...';
+        
+        // Auto-advance to next track after error
+        setTimeout(() => {
+            nextTrack();
+        }, 2000);
+    }
+
+    // Fallback for when YouTube API fails to load
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            if (!window.YT || !ytPlayer) {
+                console.warn('YouTube API failed to load, showing fallback message');
+                trackTitle.textContent = 'YouTube Player Unavailable';
+                trackArtist.textContent = 'Please check your connection';
+            }
+        }, 5000);
+    });
 }
