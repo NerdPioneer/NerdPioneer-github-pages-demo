@@ -85,10 +85,10 @@ After updating the Measurement ID:
 
 ## Privacy Considerations
 Google Analytics is configured to:
-- ✅ Respect user privacy
-- ✅ Comply with GDPR requirements
-- ✅ Use anonymous IP addresses
-- ✅ Not track personally identifiable information
+- Respect user privacy
+- Comply with GDPR requirements
+- Use anonymous IP addresses
+- Not track personally identifiable information
 
 ## Cost
 Google Analytics 4 is **completely free** with generous limits:

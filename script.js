@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize loading manager first
+    initLoadingManager();
+    
     try {
         initMobileNav();
         initSmoothScrolling();
@@ -667,66 +670,219 @@ function displayErrorMessage(message = 'Unable to load blog posts at this time.'
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(fetchMediumPosts, 1000);
 });
+
+// Loading Manager
+function initLoadingManager() {
+    const loadingOverlay = document.getElementById('loading-overlay');
+    const mainContent = document.querySelector('main');
+    
+    if (!loadingOverlay) return;
+    
+    // Set main content as hidden initially
+    if (mainContent) {
+        mainContent.classList.add('content-hidden');
+    }
+    
+    // Track loaded resources
+    let loadedResources = 0;
+    const totalResources = document.querySelectorAll('img').length + 2; // images + fonts + css
+    
+    function incrementLoaded() {
+        loadedResources++;
+        if (loadedResources >= totalResources || loadedResources >= 5) { // Don't wait too long
+            hideLoadingOverlay();
+        }
+    }
+    
+    // Hide loading overlay
+    function hideLoadingOverlay() {
+        setTimeout(() => {
+            loadingOverlay.classList.add('hidden');
+            if (mainContent) {
+                mainContent.classList.remove('content-hidden');
+                mainContent.classList.add('content-visible');
+            }
+            
+            // Remove from DOM after animation
+            setTimeout(() => {
+                if (loadingOverlay.parentNode) {
+                    loadingOverlay.parentNode.removeChild(loadingOverlay);
+                }
+            }, 500);
+        }, 800); // Minimum loading time for smooth experience
+    }
+    
+    // Load images with lazy loading enhancement
+    const images = document.querySelectorAll('img');
+    images.forEach((img, index) => {
+        if (img.complete) {
+            img.setAttribute('data-loaded', 'true');
+            incrementLoaded();
+        } else {
+            img.addEventListener('load', function() {
+                this.setAttribute('data-loaded', 'true');
+                incrementLoaded();
+            });
+            
+            img.addEventListener('error', function() {
+                console.warn('Failed to load image:', this.src);
+                incrementLoaded(); // Still count as "loaded" to prevent hanging
+            });
+        }
+    });
+    
+    // Set maximum loading time
+    setTimeout(() => {
+        hideLoadingOverlay();
+    }, 3000); // Maximum 3 seconds loading time
+    
+    // Increment for other resources (fonts, etc.)
+    setTimeout(incrementLoaded, 500); // CSS
+    setTimeout(incrementLoaded, 1000); // Fonts
+}
+
 function initProfileCarousel() {
     const images = document.querySelectorAll('.profile-image');
     console.log('Profile carousel: Found', images.length, 'images');
+    
     if (images.length === 0) {
         console.warn('No profile images found for carousel');
         return;
     }
+    
     let currentIndex = 0;
     const totalImages = images.length;
     let carouselInterval;
+    
+    // Enhanced image preloading with error handling
     images.forEach((img, index) => {
         const imageUrl = img.src;
         const preloadImg = new Image();
+        
+        preloadImg.onload = function() {
+            img.setAttribute('data-loaded', 'true');
+            console.log(`Image ${index + 1} loaded successfully:`, imageUrl);
+        };
+        
+        preloadImg.onerror = function() {
+            console.warn(`Failed to load image ${index + 1}:`, imageUrl);
+            // Set a fallback or placeholder
+            img.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            img.setAttribute('data-loaded', 'error');
+        };
+        
         preloadImg.src = imageUrl;
-        console.log(`Preloading image ${index + 1}:`, imageUrl);
     });
+    
+    // Set first image as active
     images[0].classList.add('active');
     console.log('Profile carousel initialized with', totalImages, 'images');
+    
     function showNextImage() {
         console.log(`Transitioning from image ${currentIndex + 1} to ${((currentIndex + 1) % totalImages) + 1}`);
+        
         const currentImage = images[currentIndex];
-        currentImage.style.animation = 'profileGlow 0.8s ease-in-out';
-        setTimeout(() => {
-            currentImage.classList.remove('active');
-        }, 200);
-        currentIndex = (currentIndex + 1) % totalImages;
-        const nextImage = images[currentIndex];
-        setTimeout(() => {
-            nextImage.classList.add('active');
-        }, 500);
-        setTimeout(() => {
-            images.forEach(img => img.style.animation = 'none');
-        }, 1300);
+        
+        // Enhanced mobile-friendly animation
+        if (window.innerWidth <= 768) {
+            currentImage.style.transition = 'opacity 0.3s ease';
+            currentImage.style.opacity = '0';
+            
+            setTimeout(() => {
+                currentImage.classList.remove('active');
+                currentIndex = (currentIndex + 1) % totalImages;
+                const nextImage = images[currentIndex];
+                
+                nextImage.classList.add('active');
+                nextImage.style.opacity = '1';
+            }, 300);
+        } else {
+            // Desktop animation (existing)
+            currentImage.style.animation = 'profileGlow 0.8s ease-in-out';
+            setTimeout(() => {
+                currentImage.classList.remove('active');
+            }, 200);
+            
+            currentIndex = (currentIndex + 1) % totalImages;
+            const nextImage = images[currentIndex];
+            
+            setTimeout(() => {
+                nextImage.classList.add('active');
+            }, 500);
+            
+            setTimeout(() => {
+                images.forEach(img => img.style.animation = 'none');
+            }, 1300);
+        }
     }
+    
     function startCarousel() {
         console.log('Starting profile carousel');
-        carouselInterval = setInterval(showNextImage, 4000);
+        // Adjust interval based on device
+        const interval = window.innerWidth <= 768 ? 3000 : 4000;
+        carouselInterval = setInterval(showNextImage, interval);
     }
+    
     function stopCarousel() {
         console.log('Stopping profile carousel');
         if (carouselInterval) {
             clearInterval(carouselInterval);
         }
     }
+    
     startCarousel();
+    
+    // Enhanced mobile interaction handling
     const carousel = document.querySelector('.profile-carousel');
     if (carousel) {
+        // Touch handling for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        carousel.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            stopCarousel();
+        });
+        
+        carousel.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            
+            // Swipe detection
+            if (touchStartX - touchEndX > 50) {
+                // Swipe left - next image
+                showNextImage();
+            } else if (touchEndX - touchStartX > 50) {
+                // Swipe right - previous image
+                currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+                images.forEach(img => img.classList.remove('active'));
+                images[currentIndex].classList.add('active');
+            }
+            
+            // Resume after interaction
+            setTimeout(startCarousel, 2000);
+        });
+        
+        // Desktop interactions
         carousel.addEventListener('mouseenter', stopCarousel);
         carousel.addEventListener('mouseleave', startCarousel);
-        carousel.addEventListener('touchstart', stopCarousel);
-        carousel.addEventListener('touchend', () => {
-            setTimeout(startCarousel, 2000); // Resume after 2 seconds on mobile
-        });
     }
+    
+    // Respect user's motion preferences
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         stopCarousel();
         images.forEach((img, index) => {
             if (index === 0) img.classList.add('active');
         });
     }
+    
+    // Handle visibility changes (tab switching)
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            stopCarousel();
+        } else {
+            setTimeout(startCarousel, 1000);
+        }
+    });
 }
 
 function initMusicPlayer() {

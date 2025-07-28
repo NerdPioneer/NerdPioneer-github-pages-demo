@@ -1,9 +1,79 @@
 
-/* Performance optimizations */
+/* Loading and Performance optimizations */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* Loading Indicator */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0f172a;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 255, 255, 0.1);
+    border-top: 3px solid #00ffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    color: #f1f5f9;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Image Loading States */
+.profile-image {
+    transition: opacity 0.3s ease;
+}
+
+.profile-image:not([data-loaded="true"]) {
+    opacity: 0.5;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Content reveal animation */
+.content-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.content-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 html {
@@ -3241,14 +3311,55 @@ section.blog .section-subtitle,
     }
 
     .profile-image {
-        width: 300px;
-        height: 300px;
+        width: 280px;
+        height: 280px;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s ease;
+        transform: translateZ(0); /* Force hardware acceleration */
+        will-change: opacity, transform;
     }
     
     .profile-carousel {
-        width: 300px;
-        height: 300px;
-        border-radius: 16px;
+        width: 280px;
+        height: 280px;
+        border-radius: 12px;
+        margin: 0 auto;
+        overflow: hidden;
+        transform: translateZ(0); /* Force hardware acceleration */
+    }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+    .profile-image {
+        width: 240px;
+        height: 240px;
+        border-radius: 10px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .profile-carousel {
+        width: 240px;
+        height: 240px;
+        border-radius: 10px;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+    .profile-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 8px;
+    }
+    
+    .profile-carousel {
+        width: 200px;
+        height: 200px;
+        border-radius: 8px;
     }
 
     .hero-social-links {
