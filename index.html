@@ -46,22 +46,20 @@
     
     <!-- Critical CSS for above-the-fold content -->
     <style>
-        body{font-family:'Raleway',sans-serif;margin:0;background:#f8fafc;-webkit-font-smoothing:antialiased}
-        .mobile-nav{position:fixed;top:0;left:0;right:0;background:rgba(15,23,42,0.95);backdrop-filter:blur(10px);z-index:9999;transition:all 0.3s ease}
-        .nav-container{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;max-width:1200px;margin:0 auto}
-        .brand-text{color:#f1f5f9;font-weight:600;font-size:1.2rem;text-decoration:none}
-        .brand-icon{color:#00ffff;font-size:1.8rem;transition:all 0.3s ease}
+        body{font-family:'Raleway',sans-serif;margin:0;background:#0f172a;color:#f1f5f9;-webkit-font-smoothing:antialiased}
+        .mobile-nav{position:fixed;top:0;left:0;right:0;background:rgba(15,23,42,0.98);backdrop-filter:blur(15px);z-index:9999;transition:all 0.3s ease;border-bottom:1px solid rgba(255,255,255,0.1)}
+        .nav-container{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;max-width:1200px;margin:0 auto}
+        .brand-text{color:#f1f5f9;font-weight:600;font-size:1.4rem;text-decoration:none}
+        .brand-icon{color:#00ffff;font-size:2rem;transition:all 0.3s ease}
         .brand-icon:hover{color:#f1f5f9;transform:scale(1.1)}
-        .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:4px;padding:8px}
-        .hamburger-line{width:25px;height:3px;background:#f1f5f9;transition:all 0.3s ease;border-radius:2px}
-        .nav-links{display:flex;list-style:none;margin:0;padding:0;gap:2rem}
-        .nav-link{color:#cbd5e1;text-decoration:none;font-weight:500;transition:color 0.3s ease;padding:8px 12px}
-        .nav-link:hover,.nav-link.active{color:#00ffff}
+        .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:4px;padding:10px}
+        .hamburger-line{width:28px;height:3px;background:#f1f5f9;transition:all 0.3s ease;border-radius:2px}
+        .nav-links{display:flex;list-style:none;margin:0;padding:0;gap:2.5rem}
+        .nav-link{color:#cbd5e1;text-decoration:none;font-weight:500;transition:color 0.3s ease;padding:10px 16px;font-size:1.1rem;border-radius:8px}
+        .nav-link:hover,.nav-link.active{color:#00ffff;background:rgba(0,255,255,0.1)}
         .nav-link:focus,.music-btn:focus,.project-btn-primary:focus{outline:2px solid #00ffff;outline-offset:2px}
         .brand-icon:focus{outline:2px solid #00ffff;outline-offset:4px;border-radius:4px}
-        .nav-link:focus,.music-btn:focus,.project-btn-primary:focus{outline:2px solid #00ffff;outline-offset:2px}
-        .brand-icon:focus{outline:2px solid #00ffff;outline-offset:4px;border-radius:4px}
-        @media (max-width:768px){.nav-toggle{display:flex}.nav-menu{position:absolute;top:100%;left:0;right:0;background:rgba(15,23,42,0.98);transform:translate3d(0,-100%,0);opacity:0;visibility:hidden;transition:all 0.3s ease;will-change:transform,opacity}.nav-menu.active{transform:translate3d(0,0,0);opacity:1;visibility:visible}.nav-links{flex-direction:column;padding:2rem;gap:1rem}.nav-link{font-size:1.1rem;display:block;padding:0.5rem 0}}
+        @media (max-width:768px){.nav-toggle{display:flex}.nav-menu{position:absolute;top:100%;left:0;right:0;background:rgba(15,23,42,0.98);transform:translate3d(0,-100%,0);opacity:0;visibility:hidden;transition:all 0.3s ease;will-change:transform,opacity;border-top:1px solid rgba(255,255,255,0.1)}.nav-menu.active{transform:translate3d(0,0,0);opacity:1;visibility:visible}.nav-links{flex-direction:column;padding:2rem;gap:1.5rem}.nav-link{font-size:1.2rem;display:block;padding:1rem 0;text-align:center}}
         .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-top:80px}
         .container{max-width:1200px;margin:0 auto;padding:0 2rem}
         .hero-content{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
