@@ -46,7 +46,16 @@
     <!-- Critical CSS for above-the-fold content -->
     <style>
         body{font-family:'Raleway',sans-serif;margin:0;background:#f8fafc;-webkit-font-smoothing:antialiased}
-        .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%)}
+        .mobile-nav{position:fixed;top:0;left:0;right:0;background:rgba(15,23,42,0.95);backdrop-filter:blur(10px);z-index:9999;transition:all 0.3s ease}
+        .nav-container{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;max-width:1200px;margin:0 auto}
+        .brand-text{color:#f1f5f9;font-weight:600;font-size:1.2rem;text-decoration:none}
+        .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:4px;padding:8px}
+        .hamburger-line{width:25px;height:3px;background:#f1f5f9;transition:all 0.3s ease;border-radius:2px}
+        .nav-links{display:flex;list-style:none;margin:0;padding:0;gap:2rem}
+        .nav-link{color:#cbd5e1;text-decoration:none;font-weight:500;transition:color 0.3s ease;padding:8px 12px}
+        .nav-link:hover,.nav-link.active{color:#00ffff}
+        @media (max-width:768px){.nav-toggle{display:flex}.nav-menu{position:absolute;top:100%;left:0;right:0;background:rgba(15,23,42,0.98);transform:translateY(-100%);opacity:0;visibility:hidden;transition:all 0.3s ease}.nav-menu.active{transform:translateY(0);opacity:1;visibility:visible}.nav-links{flex-direction:column;padding:2rem;gap:1rem}.nav-link{font-size:1.1rem;display:block;padding:0.5rem 0}}
+        .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding-top:80px}
         .container{max-width:1200px;margin:0 auto;padding:0 2rem}
         .hero-content{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
         .hero-title{font-size:3.5rem;font-weight:700;color:#f1f5f9;line-height:1.2;margin-bottom:1rem}
@@ -67,6 +76,9 @@
     <!-- FontAwesome with optimized loading and integrity check -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+    
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api" async></script>
     
     
     <script type="application/ld+json">
@@ -139,6 +151,33 @@
     
     <a href="#main-content" class="skip-nav">Skip to main content</a>
     
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="#home" class="brand-link">
+                    <span class="brand-text">Ezekiel Obeisun Jr.</span>
+                </a>
+            </div>
+            
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">Education</a></li>
+                    <li><a href="#learning-path" class="nav-link">Learning Path</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#skills" class="nav-link">Credentials</a></li>
+                    <li><a href="#music" class="nav-link">Study Mode</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     
     <main id="main-content">
     <section id="home" class="hero" role="banner">
@@ -299,26 +338,6 @@
             <div class="particle"></div>
             <div class="particle"></div>
             <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
         </div>
         <div class="container">
             <h2 class="section-title">
@@ -435,26 +454,6 @@
 
     <section id="projects" class="projects">
         <div class="particles-container">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
             <div class="particle"></div>
             <div class="particle"></div>
             <div class="particle"></div>
@@ -706,24 +705,72 @@
             </div>
         </div>
     </section>
+
+    <!-- Music Player Section -->
+    <section id="music" class="music-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="glitch-effect" data-text="STUDY MODE">STUDY MODE</span>
+            </h2>
+            <p class="section-subtitle">Curated lofi and study music to enhance your focus and productivity</p>
+            
+            <div class="music-player">
+                <div class="music-controls">
+                    <button class="music-btn prev-btn" aria-label="Previous track">
+                        <i class="fas fa-backward"></i>
+                    </button>
+                    <button class="music-btn play-pause-btn" aria-label="Play/Pause">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="music-btn next-btn" aria-label="Next track">
+                        <i class="fas fa-forward"></i>
+                    </button>
+                </div>
+                
+                <div class="track-info">
+                    <div class="track-title">Loading...</div>
+                    <div class="track-artist">Please wait</div>
+                </div>
+                
+                <!-- Embedded YouTube Player -->
+                <div class="youtube-player-container">
+                    <div id="youtube-player"></div>
+                </div>
+                
+                <div class="player-info">
+                    <div class="time-display">
+                        <span class="current-time">0:00</span> / <span class="total-time">30:00</span>
+                    </div>
+                    <div class="session-info">
+                        <i class="fas fa-clock"></i>
+                        <span>30-minute focus session</span>
+                    </div>
+                </div>
+                
+                <div class="youtube-action">
+                    <a href="#" class="youtube-btn" target="_blank" aria-label="Watch full video on YouTube">
+                        <i class="fab fa-youtube"></i>
+                        <span>Watch Full Video</span>
+                    </a>
+                </div>
+                
+                <div class="track-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                
+                <div class="playlist-info">
+                    <span class="current-track">1</span> / <span class="total-tracks">10</span>
+                </div>
+            </div>
+        </div>
+    </section>
     </main>
 
     
     <footer class="footer" role="contentinfo">
         <div class="particles-container">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
             <div class="particle"></div>
             <div class="particle"></div>
             <div class="particle"></div>

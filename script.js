@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     try {
+        initMobileNav();
         initSmoothScrolling();
         initProjectFiltering();
         initSkillsAnimation();
@@ -8,10 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
         initScrollAnimations();
         initTypingAnimation();
         initProfileCarousel();
+        initMusicPlayer();
     } catch (error) {
         console.error('Error initializing application:', error);
         // Fallback: at least initialize critical functions
         try {
+            initMobileNav();
             initBackToTop();
         } catch (fallbackError) {
             console.error('Critical initialization failed:', fallbackError);
@@ -50,6 +53,92 @@ function initSmoothScrolling() {
         });
     });
 }
+
+function initMobileNav() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const hamburgerLines = document.querySelectorAll('.hamburger-line');
+    
+    if (!navToggle || !navMenu) {
+        console.warn('Navigation elements not found');
+        return;
+    }
+
+    // Toggle mobile menu
+    navToggle.addEventListener('click', function() {
+        const isActive = navMenu.classList.contains('active');
+        
+        if (isActive) {
+            navMenu.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+        } else {
+            navMenu.classList.add('active');
+            navToggle.setAttribute('aria-expanded', 'true');
+        }
+        
+        // Animate hamburger lines
+        hamburgerLines.forEach((line, index) => {
+            if (!isActive) {
+                if (index === 0) line.style.transform = 'rotate(45deg) translate(6px, 6px)';
+                if (index === 1) line.style.opacity = '0';
+                if (index === 2) line.style.transform = 'rotate(-45deg) translate(6px, -6px)';
+            } else {
+                line.style.transform = 'none';
+                line.style.opacity = '1';
+            }
+        });
+    });
+
+    // Close menu when clicking on links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navMenu.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+            
+            // Reset hamburger animation
+            hamburgerLines.forEach(line => {
+                line.style.transform = 'none';
+                line.style.opacity = '1';
+            });
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+            navMenu.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+            
+            hamburgerLines.forEach(line => {
+                line.style.transform = 'none';
+                line.style.opacity = '1';
+            });
+        }
+    });
+
+    // Highlight active section in navigation
+    const sections = document.querySelectorAll('section[id]');
+    const observerOptions = {
+        rootMargin: '-50% 0px -50% 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${entry.target.id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+    
+    sections.forEach(section => observer.observe(section));
+}
+
 function initProjectFiltering() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
@@ -636,5 +725,245 @@ function initProfileCarousel() {
         images.forEach((img, index) => {
             if (index === 0) img.classList.add('active');
         });
+    }
+}
+
+function initMusicPlayer() {
+    let playlist = [];
+    let currentTrackIndex = 0;
+    let isPlaying = false;
+    let ytPlayer = null;
+    let sessionTimer = null;
+    let timeElapsed = 0;
+    const SESSION_DURATION = 30 * 60; // 30 minutes in seconds
+
+    // Get DOM elements
+    const playPauseBtn = document.querySelector('.play-pause-btn');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const trackTitle = document.querySelector('.track-title');
+    const trackArtist = document.querySelector('.track-artist');
+    const progressFill = document.querySelector('.progress-fill');
+    const currentTrackSpan = document.querySelector('.current-track');
+    const totalTracksSpan = document.querySelector('.total-tracks');
+    const youtubeBtn = document.querySelector('.youtube-btn');
+    const currentTimeSpan = document.querySelector('.current-time');
+
+    // Initialize player
+    if (!playPauseBtn) {
+        console.warn('Music player elements not found');
+        return;
+    }
+
+    // Load playlist from JSON file
+    loadPlaylist();
+
+    // YouTube API ready callback
+    window.onYouTubeIframeAPIReady = function() {
+        console.log('YouTube API ready');
+        if (playlist.length > 0) {
+            initYouTubePlayer();
+        }
+    };
+
+    async function loadPlaylist() {
+        try {
+            const response = await fetch('./playlist.json');
+            const data = await response.json();
+            playlist = data.playlist;
+            
+            // Set total tracks
+            totalTracksSpan.textContent = playlist.length;
+            
+            // Load initial track
+            loadTrack(currentTrackIndex);
+            
+            // Setup event listeners after playlist is loaded
+            setupEventListeners();
+            
+            // Initialize YouTube player if API is ready
+            if (window.YT && window.YT.Player) {
+                initYouTubePlayer();
+            }
+            
+        } catch (error) {
+            console.error('Error loading playlist:', error);
+            // Fallback playlist
+            playlist = [
+                {
+                    title: "Lofi Hip Hop",
+                    artist: "ChilledCow",
+                    youtube: "https://www.youtube.com/watch?v=5qap5aO4i9A",
+                    videoId: "5qap5aO4i9A"
+                }
+            ];
+            
+            totalTracksSpan.textContent = playlist.length;
+            loadTrack(currentTrackIndex);
+            setupEventListeners();
+            
+            if (window.YT && window.YT.Player) {
+                initYouTubePlayer();
+            }
+        }
+    }
+
+    function initYouTubePlayer() {
+        if (!playlist[currentTrackIndex] || !playlist[currentTrackIndex].videoId) {
+            console.warn('No video ID available for current track');
+            return;
+        }
+
+        ytPlayer = new YT.Player('youtube-player', {
+            height: '100%',
+            width: '100%',
+            videoId: playlist[currentTrackIndex].videoId,
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'modestbranding': 1,
+                'rel': 0,
+                'showinfo': 0,
+                'fs': 0,
+                'cc_load_policy': 0,
+                'iv_load_policy': 3,
+                'autohide': 1
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        console.log('YouTube player ready');
+        // Player is ready, we can now control it
+    }
+
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING) {
+            isPlaying = true;
+            updatePlayPauseButton();
+            startSessionTimer();
+        } else if (event.data == YT.PlayerState.PAUSED) {
+            isPlaying = false;
+            updatePlayPauseButton();
+            stopSessionTimer();
+        } else if (event.data == YT.PlayerState.ENDED) {
+            nextTrack();
+        }
+    }
+
+    function setupEventListeners() {
+        // Event listeners
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        prevBtn.addEventListener('click', previousTrack);
+        nextBtn.addEventListener('click', nextTrack);
+
+        // YouTube button click handler
+        youtubeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const currentTrack = playlist[currentTrackIndex];
+            
+            if (currentTrack && currentTrack.youtube) {
+                window.open(currentTrack.youtube, '_blank');
+            }
+        });
+    }
+
+    function loadTrack(index) {
+        const track = playlist[index];
+        trackTitle.textContent = track.title;
+        trackArtist.textContent = track.artist;
+        currentTrackSpan.textContent = index + 1;
+        
+        // Update YouTube link
+        youtubeBtn.href = track.youtube || '#';
+        
+        // Reset timer
+        timeElapsed = 0;
+        updateTimeDisplay();
+        progressFill.style.width = '0%';
+        
+        // Load new video in YouTube player
+        if (ytPlayer && ytPlayer.loadVideoById) {
+            ytPlayer.loadVideoById(track.videoId);
+        }
+    }
+
+    function togglePlayPause() {
+        if (!ytPlayer) {
+            console.warn('YouTube player not ready');
+            return;
+        }
+
+        if (isPlaying) {
+            ytPlayer.pauseVideo();
+        } else {
+            ytPlayer.playVideo();
+        }
+    }
+
+    function updatePlayPauseButton() {
+        const icon = playPauseBtn.querySelector('i');
+        icon.className = isPlaying ? 'fas fa-pause' : 'fas fa-play';
+    }
+
+    function previousTrack() {
+        currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+        loadTrack(currentTrackIndex);
+        stopSessionTimer();
+    }
+
+    function nextTrack() {
+        currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+        loadTrack(currentTrackIndex);
+        stopSessionTimer();
+    }
+
+    function startSessionTimer() {
+        stopSessionTimer(); // Clear any existing timer
+        
+        sessionTimer = setInterval(() => {
+            timeElapsed++;
+            updateTimeDisplay();
+            updateProgressBar();
+            
+            // Stop after 30 minutes
+            if (timeElapsed >= SESSION_DURATION) {
+                stopSession();
+            }
+        }, 1000);
+    }
+
+    function stopSessionTimer() {
+        if (sessionTimer) {
+            clearInterval(sessionTimer);
+            sessionTimer = null;
+        }
+    }
+
+    function stopSession() {
+        if (ytPlayer) {
+            ytPlayer.pauseVideo();
+        }
+        stopSessionTimer();
+        
+        // Show session complete message
+        setTimeout(() => {
+            alert('🎯 Study session complete! You\'ve focused for 30 minutes. Great job!');
+        }, 500);
+    }
+
+    function updateTimeDisplay() {
+        const minutes = Math.floor(timeElapsed / 60);
+        const seconds = timeElapsed % 60;
+        currentTimeSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function updateProgressBar() {
+        const progressPercent = (timeElapsed / SESSION_DURATION) * 100;
+        progressFill.style.width = `${Math.min(progressPercent, 100)}%`;
     }
 }
