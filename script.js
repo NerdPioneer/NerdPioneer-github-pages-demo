@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initTypingAnimation();
         initProfileCarousel();
         initMusicPlayer();
+        initAnalyticsTracking(); // Initialize Google Analytics event tracking
     } catch (error) {
         console.error('Error initializing application:', error);
         // Fallback: at least initialize critical functions
@@ -990,4 +991,136 @@ function initMusicPlayer() {
             }
         }, 5000);
     });
+}
+
+// Google Analytics Event Tracking
+function initAnalyticsTracking() {
+    // Helper function to safely send events to Google Analytics
+    function sendGAEvent(eventName, eventCategory, eventLabel, value = null) {
+        if (typeof gtag !== 'undefined') {
+            const eventData = {
+                event_category: eventCategory,
+                event_label: eventLabel
+            };
+            if (value !== null) {
+                eventData.value = value;
+            }
+            gtag('event', eventName, eventData);
+            console.log(`GA Event: ${eventName} | ${eventCategory} | ${eventLabel}`);
+        }
+    }
+
+    // Track section navigation
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            const section = this.getAttribute('href').replace('#', '');
+            sendGAEvent('navigation_click', 'Navigation', `Section: ${section}`);
+        });
+    });
+
+    // Track project interactions
+    const projectButtons = document.querySelectorAll('.project-btn-primary');
+    projectButtons.forEach((button, index) => {
+        button.addEventListener('click', function() {
+            const projectCard = this.closest('.project-card');
+            const projectTitle = projectCard.querySelector('h3').textContent;
+            sendGAEvent('project_view', 'Projects', `Project: ${projectTitle}`);
+        });
+    });
+
+    // Track social media clicks
+    const socialLinks = document.querySelectorAll('.social-link');
+    socialLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            const href = this.getAttribute('href');
+            let platform = 'Unknown';
+            if (href.includes('linkedin')) platform = 'LinkedIn';
+            if (href.includes('github')) platform = 'GitHub';
+            if (href.includes('medium')) platform = 'Medium';
+            sendGAEvent('social_click', 'Social Media', platform);
+        });
+    });
+
+    // Track Study Mode interactions
+    const musicButtons = document.querySelectorAll('.music-btn');
+    musicButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            let action = 'Unknown';
+            if (button.classList.contains('play-pause-btn')) action = 'Play/Pause';
+            if (button.classList.contains('next-btn')) action = 'Next Track';
+            if (button.classList.contains('prev-btn')) action = 'Previous Track';
+            sendGAEvent('study_mode_interaction', 'Study Mode', action);
+        });
+    });
+
+    // Track YouTube link clicks
+    const youtubeBtn = document.querySelector('.youtube-btn');
+    if (youtubeBtn) {
+        youtubeBtn.addEventListener('click', function() {
+            sendGAEvent('youtube_click', 'Study Mode', 'YouTube Link');
+        });
+    }
+
+    // Track main CTA button
+    const heroCTA = document.querySelector('.hero-cta');
+    if (heroCTA) {
+        heroCTA.addEventListener('click', function() {
+            sendGAEvent('cta_click', 'Hero Section', 'View My Work');
+        });
+    }
+
+    // Track scroll depth for engagement measurement
+    let scrollDepthMarkers = [25, 50, 75, 100];
+    let scrollDepthTriggered = [];
+    
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.body.scrollHeight;
+        const winHeight = window.innerHeight;
+        const scrollPercent = Math.round((scrollTop / (docHeight - winHeight)) * 100);
+        
+        scrollDepthMarkers.forEach(marker => {
+            if (scrollPercent >= marker && !scrollDepthTriggered.includes(marker)) {
+                scrollDepthTriggered.push(marker);
+                sendGAEvent('scroll_depth', 'Engagement', `${marker}% Scrolled`, marker);
+            }
+        });
+    });
+
+    // Track page view time (send event after 30 seconds)
+    setTimeout(() => {
+        sendGAEvent('engagement_time', 'Engagement', '30 Seconds Active', 30);
+    }, 30000);
+
+    // Track page view time (send event after 2 minutes)
+    setTimeout(() => {
+        sendGAEvent('engagement_time', 'Engagement', '2 Minutes Active', 120);
+    }, 120000);
+
+    // Track when users reach the Study Mode section
+    const studyModeSection = document.querySelector('#music');
+    if (studyModeSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    sendGAEvent('section_view', 'Engagement', 'Study Mode Section Viewed');
+                    observer.unobserve(entry.target); // Only track once
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(studyModeSection);
+    }
+
+    // Track document visibility changes (tab switching)
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            sendGAEvent('tab_hidden', 'Engagement', 'User Switched Tabs');
+        } else {
+            sendGAEvent('tab_visible', 'Engagement', 'User Returned to Tab');
+        }
+    });
+
+    console.log('Google Analytics event tracking initialized');
 }
