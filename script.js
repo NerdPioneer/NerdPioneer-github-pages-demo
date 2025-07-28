@@ -225,20 +225,22 @@ function initBackToTop() {
         return;
     }
 
-    // Show button when user scrolls past the hero section (about 80vh)
-    let showThreshold = window.innerHeight * 0.8;
+    // Show button when user scrolls past 300px
+    const showThreshold = 300;
     
     // Throttled scroll handler for better performance
     let scrollTimeout;
     const handleScroll = () => {
         if (scrollTimeout) return;
         scrollTimeout = setTimeout(() => {
-            const scrollY = window.scrollY || window.pageYOffset;
+            const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
             
             if (scrollY > showThreshold) {
                 backToTopBtn.classList.add('visible');
+                backToTopBtn.style.display = 'block';
             } else {
                 backToTopBtn.classList.remove('visible');
+                // Don't hide immediately, let CSS transition handle it
             }
             scrollTimeout = null;
         }, 16); // ~60fps
@@ -251,24 +253,31 @@ function initBackToTop() {
     
     backToTopBtn.addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         
-        // Smooth scroll to top
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        // Smooth scroll to top with fallback
+        if ('scrollBehavior' in document.documentElement.style) {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        } else {
+            // Fallback for older browsers
+            window.scrollTo(0, 0);
+        }
         
-        // Optional: Hide button immediately on click for better UX
+        // Hide button after scrolling
         setTimeout(() => {
-            if (window.scrollY <= showThreshold) {
+            const currentScroll = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+            if (currentScroll <= showThreshold) {
                 backToTopBtn.classList.remove('visible');
             }
-        }, 100);
+        }, 500);
     });
 
-    // Handle resize to recalculate threshold
+    // Handle resize to ensure button works on different screen sizes
     window.addEventListener('resize', () => {
-        showThreshold = window.innerHeight * 0.8;
+        handleScroll(); // Re-check scroll position on resize
     }, { passive: true });
 }
 function initScrollAnimations() {
