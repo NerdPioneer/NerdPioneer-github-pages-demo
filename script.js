@@ -1198,6 +1198,14 @@ function initAnalyticsTracking() {
         });
     });
 
+    // Track LinkedIn CTA button specifically
+    const linkedinCTABtn = document.querySelector('.linkedin-cta-btn');
+    if (linkedinCTABtn) {
+        linkedinCTABtn.addEventListener('click', function() {
+            sendGAEvent('linkedin_cta_click', 'Certifications', 'LinkedIn CTA Button');
+        });
+    }
+
     // Track Study Mode interactions
     const musicButtons = document.querySelectorAll('.music-btn');
     musicButtons.forEach(button => {
