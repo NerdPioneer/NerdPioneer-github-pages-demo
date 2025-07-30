@@ -1354,9 +1354,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .learning-stations {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    justify-items: center;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .learning-station {
@@ -1660,8 +1664,10 @@ h1, h2, h3, h4, h5, h6 {
     
     .learning-stations {
         grid-template-columns: 1fr;
-        gap: 1.25rem;
-        margin: 0 1rem;
+        gap: 1.5rem;
+        margin: 0 auto;
+        max-width: 350px;
+        padding: 0 1rem;
     }
     
     .station-card {
@@ -1704,6 +1710,19 @@ h1, h2, h3, h4, h5, h6 {
     
     .particle:nth-child(odd) {
         animation-duration: 14s;
+    }
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .learning-stations {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        max-width: 700px;
+    }
+    
+    .station-card {
+        padding: 1.5rem;
     }
 }
 
