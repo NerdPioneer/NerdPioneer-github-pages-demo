@@ -8,18 +8,17 @@ document.addEventListener('DOMContentLoaded', function() {
         initProjectFiltering();
         initSkillsAnimation();
         initContactForm();
-        initBackToTop();
         initScrollAnimations();
         initTypingAnimation();
         initProfileCarousel();
         initMusicPlayer();
+        initSubstackNewsletter();
         initAnalyticsTracking(); // Initialize Google Analytics event tracking
     } catch (error) {
         console.error('Error initializing application:', error);
         // Fallback: at least initialize critical functions
         try {
             initMobileNav();
-            initBackToTop();
         } catch (fallbackError) {
             console.error('Critical initialization failed:', fallbackError);
         }
@@ -334,98 +333,7 @@ function hideNotification(notification) {
         }
     }, 300);
 }
-function initBackToTop() {
-    const backToTopBtn = document.getElementById('back-to-top');
-    if (!backToTopBtn) {
-        console.warn('Back to top button not found');
-        return;
-    }
 
-    // Show button when user scrolls past 400px
-    const showThreshold = 400;
-    let isScrolling = false;
-    let isVisible = false;
-    
-    // Optimized scroll handler with requestAnimationFrame
-    const handleScroll = () => {
-        if (!isScrolling) {
-            requestAnimationFrame(() => {
-                const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-                
-                if (scrollY > showThreshold && !isVisible) {
-                    backToTopBtn.classList.add('visible');
-                    isVisible = true;
-                } else if (scrollY <= showThreshold && isVisible) {
-                    backToTopBtn.classList.remove('visible');
-                    isVisible = false;
-                }
-                isScrolling = false;
-            });
-            isScrolling = true;
-        }
-    };
-
-    // Initial check in case page is already scrolled
-    handleScroll();
-    
-    // Attach scroll listener
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Enhanced click handler with improved smooth scrolling
-    backToTopBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        // Immediately hide the button for better UX
-        backToTopBtn.classList.remove('visible');
-        isVisible = false;
-        
-        // Enhanced smooth scroll implementation
-        const scrollToTop = () => {
-            const currentScroll = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-            
-            if ('scrollBehavior' in document.documentElement.style) {
-                // Modern browsers with native smooth scroll
-                window.scrollTo({
-                    top: 0,
-                    left: 0,
-                    behavior: 'smooth'
-                });
-            } else {
-                // Enhanced fallback smooth scroll for older browsers
-                if (currentScroll > 0) {
-                    window.requestAnimationFrame(scrollToTop);
-                    const scrollStep = Math.max(currentScroll / 10, 20);
-                    window.scrollTo(0, currentScroll - scrollStep);
-                }
-            }
-        };
-        
-        scrollToTop();
-        
-        // Re-check visibility after scroll animation completes
-        setTimeout(() => {
-            handleScroll();
-        }, 1000);
-    });
-
-    // Handle resize and orientation changes
-    const handleResize = () => {
-        requestAnimationFrame(() => {
-            handleScroll(); // Re-check scroll position
-        });
-    };
-    
-    window.addEventListener('resize', handleResize, { passive: true });
-    window.addEventListener('orientationchange', handleResize, { passive: true });
-    
-    // Handle page visibility changes
-    document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) {
-            setTimeout(handleScroll, 100);
-        }
-    });
-}
 function initScrollAnimations() {
     const animatedElements = document.querySelectorAll('.about-text, .about-image, .project-card, .skill-item, .contact-item');
     const observer = new IntersectionObserver((entries) => {
@@ -1402,4 +1310,111 @@ function initAnalyticsTracking() {
     });
 
     console.log('Google Analytics event tracking initialized');
+}
+
+// Substack Newsletter Popup
+function initSubstackNewsletter() {
+    const popup = document.getElementById('substack-popup');
+    const closeBtn = document.querySelector('.popup-close');
+    const overlay = document.querySelector('.substack-popup-overlay');
+    
+    if (!popup) {
+        console.warn('Substack popup not found');
+        return;
+    }
+    
+    // Check if user has already seen the popup (localStorage)
+    const hasSeenPopup = localStorage.getItem('substackPopupSeen');
+    const lastShown = localStorage.getItem('substackPopupLastShown');
+    const now = Date.now();
+    const oneDayMs = 24 * 60 * 60 * 1000; // 24 hours
+    
+    // Show popup after 3 seconds if not seen recently
+    if (!hasSeenPopup || (lastShown && (now - parseInt(lastShown)) > oneDayMs)) {
+        setTimeout(() => {
+            showPopup();
+        }, 3000);
+    }
+    
+    function showPopup() {
+        popup.classList.add('show');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        
+        // Track popup view
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'newsletter_popup_shown', {
+                event_category: 'Newsletter',
+                event_label: 'Substack Popup'
+            });
+        }
+        
+        // Mark as shown
+        localStorage.setItem('substackPopupSeen', 'true');
+        localStorage.setItem('substackPopupLastShown', Date.now().toString());
+    }
+    
+    function hidePopup() {
+        popup.classList.remove('show');
+        document.body.style.overflow = ''; // Restore scrolling
+        
+        // Track popup close
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'newsletter_popup_closed', {
+                event_category: 'Newsletter',
+                event_label: 'User Closed Popup'
+            });
+        }
+    }
+    
+    // Close popup when clicking the close button
+    if (closeBtn) {
+        closeBtn.addEventListener('click', hidePopup);
+    }
+    
+    // Close popup when clicking the overlay (outside the modal)
+    if (overlay) {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                hidePopup();
+            }
+        });
+    }
+    
+    // Close popup with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && popup.classList.contains('show')) {
+            hidePopup();
+        }
+    });
+    
+    // Track subscription link clicks
+    const subscribeBtn = popup.querySelector('.substack-popup-btn');
+    if (subscribeBtn) {
+        subscribeBtn.addEventListener('click', function() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'newsletter_subscribe_click', {
+                    event_category: 'Newsletter',
+                    event_label: 'Substack Subscribe Button',
+                    value: 1
+                });
+            }
+            
+            // Mark as subscribed in localStorage
+            localStorage.setItem('substackSubscribed', 'true');
+            localStorage.setItem('substackPopupSeen', 'true');
+            
+            // Close popup after short delay
+            setTimeout(hidePopup, 500);
+        });
+    }
+    
+    // Respect user's reduced motion preferences
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const modal = popup.querySelector('.substack-popup-modal');
+        if (modal) {
+            modal.style.transition = 'opacity 0.3s ease';
+        }
+    }
+    
+    console.log('Substack newsletter popup initialized');
 }
