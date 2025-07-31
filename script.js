@@ -70,24 +70,31 @@ function initMobileNav() {
     }
 
     // Toggle mobile menu
-    navToggle.addEventListener('click', function() {
+    navToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
         const isActive = navMenu.classList.contains('active');
         
         if (isActive) {
             navMenu.classList.remove('active');
             navToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = ''; // Re-enable scrolling
         } else {
             navMenu.classList.add('active');
             navToggle.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
         }
         
-        // Animate hamburger lines
+        // Simple hamburger animation
         hamburgerLines.forEach((line, index) => {
             if (!isActive) {
+                // Create X shape
                 if (index === 0) line.style.transform = 'rotate(45deg) translate(6px, 6px)';
                 if (index === 1) line.style.opacity = '0';
                 if (index === 2) line.style.transform = 'rotate(-45deg) translate(6px, -6px)';
             } else {
+                // Reset to hamburger
                 line.style.transform = 'none';
                 line.style.opacity = '1';
             }
@@ -99,6 +106,7 @@ function initMobileNav() {
         link.addEventListener('click', function() {
             navMenu.classList.remove('active');
             navToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = ''; // Re-enable scrolling
             
             // Reset hamburger animation
             hamburgerLines.forEach(line => {
@@ -113,6 +121,21 @@ function initMobileNav() {
         if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
             navMenu.classList.remove('active');
             navToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = ''; // Re-enable scrolling
+            
+            hamburgerLines.forEach(line => {
+                line.style.transform = 'none';
+                line.style.opacity = '1';
+            });
+        }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = ''; // Re-enable scrolling
             
             hamburgerLines.forEach(line => {
                 line.style.transform = 'none';
@@ -330,10 +353,8 @@ function initBackToTop() {
             
             if (scrollY > showThreshold) {
                 backToTopBtn.classList.add('visible');
-                backToTopBtn.style.display = 'block';
             } else {
                 backToTopBtn.classList.remove('visible');
-                // Don't hide immediately, let CSS transition handle it
             }
             scrollTimeout = null;
         }, 16); // ~60fps
