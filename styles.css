@@ -3009,8 +3009,8 @@ section.blog .section-subtitle,
 
 .notes-content {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
     align-items: stretch;
     margin-top: 3rem;
     position: relative;
@@ -3048,12 +3048,11 @@ section.blog .section-subtitle,
 }
 
 .substack-card {
-    border-color: #ff6b35;
+    
 }
 
 .substack-card:hover {
-    border-color: #ff5722;
-    box-shadow: 0 12px 30px rgba(255, 107, 53, 0.2);
+    
 }
 
 .github-card {
@@ -3086,7 +3085,7 @@ section.blog .section-subtitle,
 }
 
 .substack-icon {
-    color: #ff6b35;
+    
 }
 
 .platform-card:hover .platform-icon {
@@ -3168,21 +3167,15 @@ section.blog .section-subtitle,
 }
 
 .substack-btn {
-    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-    border-color: #ff6b35;
-    position: relative;
-    overflow: hidden;
+    
 }
 
 .substack-btn:hover {
-    background: linear-gradient(135deg, #ff5722 0%, #ff8a50 100%);
-    border-color: #ff5722;
-    transform: translateY(-1px);
-    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+    
 }
 
 .substack-btn:hover .btn-content i {
-    transform: scale(1.05) translateX(3px);
+    
 }
 
 .btn-content {
