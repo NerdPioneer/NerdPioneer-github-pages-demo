@@ -197,6 +197,7 @@
                     <li><a href="#learning-path" class="nav-link">Learning Path</a></li>
                     <li><a href="#projects" class="nav-link">Projects</a></li>
                     <li><a href="#skills" class="nav-link">Credentials</a></li>
+                    <li><a href="#notes" class="nav-link">Notes</a></li>
                     <li><a href="#music" class="nav-link">Study Mode</a></li>
                 </ul>
             </div>
@@ -743,8 +744,49 @@
         </div>
     </section>
 
+    <!-- Notes from the Climb Section -->
+    <section id="notes" class="notes-section medium-style">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="notes-title" data-text="NOTES FROM THE CLIMB">NOTES FROM THE CLIMB</span>
+            </h2>
+            <p class="section-subtitle">Documenting the journey, one insight at a time</p>
+            
+            <div class="notes-content">
+                <div class="notes-description">
+                    <div class="notes-icon">
+                        <i class="fab fa-medium"></i>
+                    </div>
+                    <p class="notes-text">
+                        Get a front-row seat to my evolving path in cloud computing, network engineering, and career growth—every milestone, insight, and lesson captured in my Medium posts.
+                    </p>
+                </div>
+                
+                <div class="notes-action">
+                    <a href="https://medium.com/@nerdpioneer" target="_blank" rel="noopener noreferrer" class="medium-btn">
+                        <div class="btn-content">
+                            <i class="fab fa-medium" aria-hidden="true"></i>
+                            <span class="btn-text">
+                                <span class="btn-main">Read My Journey</span>
+                                <span class="btn-sub">Latest insights & reflections</span>
+                            </span>
+                        </div>
+                        <div class="btn-trail"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Music Player Section -->
     <section id="music" class="music-section">
+        <div class="music-particles">
+            <div class="sound-wave"></div>
+            <div class="sound-wave"></div>
+            <div class="sound-wave"></div>
+            <div class="sound-wave"></div>
+            <div class="sound-wave"></div>
+        </div>
         <div class="container">
             <h2 class="section-title">
                 <span class="glitch-effect" data-text="STUDY MODE">STUDY MODE</span>
@@ -752,21 +794,29 @@
             <p class="section-subtitle">Curated lofi and study music to enhance your focus and productivity</p>
             
             <div class="music-player">
-                <div class="music-controls">
-                    <button class="music-btn prev-btn" aria-label="Previous track">
-                        <i class="fas fa-backward"></i>
-                    </button>
-                    <button class="music-btn play-pause-btn" aria-label="Play/Pause">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <button class="music-btn next-btn" aria-label="Next track">
-                        <i class="fas fa-forward"></i>
-                    </button>
+                <div class="player-header">
+                    <div class="now-playing-indicator">
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                    </div>
+                    <div class="track-info">
+                        <div class="track-title">Loading...</div>
+                        <div class="track-artist">Please wait</div>
+                    </div>
                 </div>
                 
-                <div class="track-info">
-                    <div class="track-title">Loading...</div>
-                    <div class="track-artist">Please wait</div>
+                <div class="music-controls">
+                    <button class="music-btn prev-btn" aria-label="Previous track" title="Previous track (←)">
+                        <i class="fas fa-backward"></i>
+                    </button>
+                    <button class="music-btn play-pause-btn" aria-label="Play/Pause" title="Play/Pause (Space)">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="music-btn next-btn" aria-label="Next track" title="Next track (→)">
+                        <i class="fas fa-forward"></i>
+                    </button>
                 </div>
                 
                 <!-- Embedded YouTube Player -->
@@ -775,20 +825,13 @@
                 </div>
                 
                 <div class="player-info">
-                    <div class="time-display">
-                        <span class="current-time">0:00</span> / <span class="total-time">30:00</span>
-                    </div>
                     <div class="session-info">
                         <i class="fas fa-clock"></i>
                         <span>30-minute focus session</span>
                     </div>
-                </div>
-                
-                <div class="youtube-action">
-                    <a href="#" class="youtube-btn" target="_blank" aria-label="Watch full video on YouTube">
-                        <i class="fab fa-youtube"></i>
-                        <span>Watch Full Video</span>
-                    </a>
+                    <div class="time-display">
+                        <span class="current-time">0:00</span> / <span class="total-time">30:00</span>
+                    </div>
                 </div>
                 
                 <div class="track-progress">
@@ -797,8 +840,25 @@
                     </div>
                 </div>
                 
-                <div class="playlist-info">
-                    <span class="current-track">1</span> / <span class="total-tracks">10</span>
+                <div class="player-footer">
+                    <div class="playlist-info">
+                        <i class="fas fa-music"></i>
+                        <span class="current-track">1</span> / <span class="total-tracks">10</span>
+                    </div>
+                    
+                    <div class="youtube-action">
+                        <a href="#" class="youtube-btn" target="_blank" aria-label="Watch full video on YouTube">
+                            <i class="fab fa-youtube"></i>
+                            <span>Watch on YouTube</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="keyboard-shortcuts">
+                    <div class="shortcuts-hint">
+                        <i class="fas fa-keyboard"></i>
+                        <span>Keyboard shortcuts: Space (play/pause) • ← → (navigate)</span>
+                    </div>
                 </div>
             </div>
         </div>

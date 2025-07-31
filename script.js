@@ -1009,9 +1009,22 @@ function initMusicPlayer() {
             stopSessionTimer();
         } else if (event.data == YT.PlayerState.ENDED) {
             nextTrack();
-        } else if (event.data == YT.PlayerState.ERROR) {
-            handlePlayerError('Video unavailable');
+        } else if (event.data == YT.PlayerState.UNSTARTED) {
+            // Video loaded but not started
+            console.log('Video loaded, ready to play');
+        } else if (event.data == YT.PlayerState.BUFFERING) {
+            console.log('Video buffering...');
+        } else if (event.data == YT.PlayerState.CUED) {
+            console.log('Video cued and ready');
         }
+    }
+
+    function handlePlayerError(error) {
+        console.error('YouTube Player Error:', error);
+        // Try next track if current one fails
+        setTimeout(() => {
+            nextTrack();
+        }, 2000);
     }
 
     function setupEventListeners() {
@@ -1027,6 +1040,39 @@ function initMusicPlayer() {
             
             if (currentTrack && currentTrack.youtube) {
                 window.open(currentTrack.youtube, '_blank');
+                
+                // Track analytics
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'youtube_link_click', {
+                        'track_title': currentTrack.title,
+                        'track_artist': currentTrack.artist
+                    });
+                }
+            }
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Only activate if music section is visible or focused
+            const musicSection = document.getElementById('music');
+            const rect = musicSection.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            
+            if (isVisible && !e.target.matches('input, textarea')) {
+                switch(e.code) {
+                    case 'Space':
+                        e.preventDefault();
+                        togglePlayPause();
+                        break;
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        previousTrack();
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        nextTrack();
+                        break;
+                }
             }
         });
     }
@@ -1067,6 +1113,22 @@ function initMusicPlayer() {
     function updatePlayPauseButton() {
         const icon = playPauseBtn.querySelector('i');
         icon.className = isPlaying ? 'fas fa-pause' : 'fas fa-play';
+        
+        // Control visual indicators
+        updateVisualIndicators();
+    }
+
+    function updateVisualIndicators() {
+        const nowPlayingIndicator = document.querySelector('.now-playing-indicator');
+        const soundWaves = document.querySelectorAll('.sound-wave');
+        
+        if (isPlaying) {
+            nowPlayingIndicator?.classList.add('playing');
+            soundWaves.forEach(wave => wave.style.animationPlayState = 'running');
+        } else {
+            nowPlayingIndicator?.classList.remove('playing');
+            soundWaves.forEach(wave => wave.style.animationPlayState = 'paused');
+        }
     }
 
     function previousTrack() {
