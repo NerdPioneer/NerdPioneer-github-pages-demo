@@ -3906,19 +3906,22 @@ section.blog .section-subtitle,
     border-radius: 50%;
     cursor: pointer;
     font-size: 1.3rem;
-    display: flex; /* Always use flex for centering */
+    display: flex;
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 10000;
+    z-index: 999999; /* Maximum z-index to ensure it's always on top */
     will-change: opacity, visibility, transform;
     box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
     justify-content: center;
     align-items: center;
     font-weight: 600;
-    /* Ensure button stays on screen during scrolling */
     pointer-events: auto;
+    /* Complete isolation from other elements */
+    isolation: isolate;
+    /* Ensure it's never affected by any parent containers */
+    contain: layout style paint;
 }
 
 .back-to-top.visible {
@@ -3932,6 +3935,12 @@ section.blog .section-subtitle,
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 8px 25px rgba(0, 255, 255, 0.5);
     background: linear-gradient(135deg, #00ffff 0%, #0080ff 100%);
+}
+
+/* Ensure back-to-top button is never affected by footer */
+.footer {
+    position: relative;
+    z-index: 1;
 }
 
 /* Back to top button mobile responsive styles */

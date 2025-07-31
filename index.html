@@ -61,6 +61,8 @@
     <!-- Critical CSS for above-the-fold content -->
     <style>
         body{font-family:'Raleway',sans-serif;margin:0;background:#0f172a;color:#f1f5f9;-webkit-font-smoothing:antialiased}
+        html{scroll-behavior:smooth}
+        *{scroll-behavior:smooth}
         .mobile-nav{position:fixed;top:0;left:0;right:0;background:rgba(15,23,42,0.98);backdrop-filter:blur(15px);z-index:9999;transition:all 0.3s ease;border-bottom:1px solid rgba(255,255,255,0.1);box-shadow:0 2px 10px rgba(0,0,0,0.3)}
         .nav-container{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;max-width:1200px;margin:0 auto}
         .brand-text{color:#f1f5f9;font-weight:600;font-size:1.4rem;text-decoration:none}
@@ -903,6 +905,11 @@
     </section>
     </main>
 
+    <!-- Back to Top Button - Positioned before footer to avoid any conflicts -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     
     <footer class="footer" role="contentinfo">
         <div class="container">
@@ -911,10 +918,6 @@
             </div>
         </div>
     </footer>
-
-    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
-        <i class="fas fa-chevron-up"></i>
-    </button>
 
     <script src="script.js" defer></script>
 </body>

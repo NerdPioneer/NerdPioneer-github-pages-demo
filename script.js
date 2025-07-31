@@ -341,58 +341,90 @@ function initBackToTop() {
         return;
     }
 
-    // Show button when user scrolls past 300px
-    const showThreshold = 300;
+    // Show button when user scrolls past 400px
+    const showThreshold = 400;
+    let isScrolling = false;
+    let isVisible = false;
     
-    // Throttled scroll handler for better performance
-    let scrollTimeout;
+    // Optimized scroll handler with requestAnimationFrame
     const handleScroll = () => {
-        if (scrollTimeout) return;
-        scrollTimeout = setTimeout(() => {
-            const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollY > showThreshold) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
-            }
-            scrollTimeout = null;
-        }, 16); // ~60fps
+        if (!isScrolling) {
+            requestAnimationFrame(() => {
+                const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollY > showThreshold && !isVisible) {
+                    backToTopBtn.classList.add('visible');
+                    isVisible = true;
+                } else if (scrollY <= showThreshold && isVisible) {
+                    backToTopBtn.classList.remove('visible');
+                    isVisible = false;
+                }
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
     };
 
     // Initial check in case page is already scrolled
     handleScroll();
     
+    // Attach scroll listener
     window.addEventListener('scroll', handleScroll, { passive: true });
     
+    // Enhanced click handler with improved smooth scrolling
     backToTopBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         
-        // Smooth scroll to top with fallback
-        if ('scrollBehavior' in document.documentElement.style) {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        } else {
-            // Fallback for older browsers
-            window.scrollTo(0, 0);
-        }
+        // Immediately hide the button for better UX
+        backToTopBtn.classList.remove('visible');
+        isVisible = false;
         
-        // Hide button after scrolling
-        setTimeout(() => {
+        // Enhanced smooth scroll implementation
+        const scrollToTop = () => {
             const currentScroll = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-            if (currentScroll <= showThreshold) {
-                backToTopBtn.classList.remove('visible');
+            
+            if ('scrollBehavior' in document.documentElement.style) {
+                // Modern browsers with native smooth scroll
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: 'smooth'
+                });
+            } else {
+                // Enhanced fallback smooth scroll for older browsers
+                if (currentScroll > 0) {
+                    window.requestAnimationFrame(scrollToTop);
+                    const scrollStep = Math.max(currentScroll / 10, 20);
+                    window.scrollTo(0, currentScroll - scrollStep);
+                }
             }
-        }, 500);
+        };
+        
+        scrollToTop();
+        
+        // Re-check visibility after scroll animation completes
+        setTimeout(() => {
+            handleScroll();
+        }, 1000);
     });
 
-    // Handle resize to ensure button works on different screen sizes
-    window.addEventListener('resize', () => {
-        handleScroll(); // Re-check scroll position on resize
-    }, { passive: true });
+    // Handle resize and orientation changes
+    const handleResize = () => {
+        requestAnimationFrame(() => {
+            handleScroll(); // Re-check scroll position
+        });
+    };
+    
+    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('orientationchange', handleResize, { passive: true });
+    
+    // Handle page visibility changes
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            setTimeout(handleScroll, 100);
+        }
+    });
 }
 function initScrollAnimations() {
     const animatedElements = document.querySelectorAll('.about-text, .about-image, .project-card, .skill-item, .contact-item');
