@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
         initTypingAnimation();
         initProfileCarousel();
         initMusicPlayer();
-        initSubstackNewsletter();
         initAnalyticsTracking(); // Initialize Google Analytics event tracking
     } catch (error) {
         console.error('Error initializing application:', error);
@@ -1310,111 +1309,4 @@ function initAnalyticsTracking() {
     });
 
     console.log('Google Analytics event tracking initialized');
-}
-
-// Substack Newsletter Popup
-function initSubstackNewsletter() {
-    const popup = document.getElementById('substack-popup');
-    const closeBtn = document.querySelector('.popup-close');
-    const overlay = document.querySelector('.substack-popup-overlay');
-    
-    if (!popup) {
-        console.warn('Substack popup not found');
-        return;
-    }
-    
-    // Check if user has already seen the popup (localStorage)
-    const hasSeenPopup = localStorage.getItem('substackPopupSeen');
-    const lastShown = localStorage.getItem('substackPopupLastShown');
-    const now = Date.now();
-    const oneDayMs = 24 * 60 * 60 * 1000; // 24 hours
-    
-    // Show popup after 3 seconds if not seen recently
-    if (!hasSeenPopup || (lastShown && (now - parseInt(lastShown)) > oneDayMs)) {
-        setTimeout(() => {
-            showPopup();
-        }, 3000);
-    }
-    
-    function showPopup() {
-        popup.classList.add('show');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        
-        // Track popup view
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'newsletter_popup_shown', {
-                event_category: 'Newsletter',
-                event_label: 'Substack Popup'
-            });
-        }
-        
-        // Mark as shown
-        localStorage.setItem('substackPopupSeen', 'true');
-        localStorage.setItem('substackPopupLastShown', Date.now().toString());
-    }
-    
-    function hidePopup() {
-        popup.classList.remove('show');
-        document.body.style.overflow = ''; // Restore scrolling
-        
-        // Track popup close
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'newsletter_popup_closed', {
-                event_category: 'Newsletter',
-                event_label: 'User Closed Popup'
-            });
-        }
-    }
-    
-    // Close popup when clicking the close button
-    if (closeBtn) {
-        closeBtn.addEventListener('click', hidePopup);
-    }
-    
-    // Close popup when clicking the overlay (outside the modal)
-    if (overlay) {
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) {
-                hidePopup();
-            }
-        });
-    }
-    
-    // Close popup with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && popup.classList.contains('show')) {
-            hidePopup();
-        }
-    });
-    
-    // Track subscription link clicks
-    const subscribeBtn = popup.querySelector('.substack-popup-btn');
-    if (subscribeBtn) {
-        subscribeBtn.addEventListener('click', function() {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'newsletter_subscribe_click', {
-                    event_category: 'Newsletter',
-                    event_label: 'Substack Subscribe Button',
-                    value: 1
-                });
-            }
-            
-            // Mark as subscribed in localStorage
-            localStorage.setItem('substackSubscribed', 'true');
-            localStorage.setItem('substackPopupSeen', 'true');
-            
-            // Close popup after short delay
-            setTimeout(hidePopup, 500);
-        });
-    }
-    
-    // Respect user's reduced motion preferences
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const modal = popup.querySelector('.substack-popup-modal');
-        if (modal) {
-            modal.style.transition = 'opacity 0.3s ease';
-        }
-    }
-    
-    console.log('Substack newsletter popup initialized');
 }
