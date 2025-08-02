@@ -1,6 +1,50 @@
+// Early mobile loading screen initialization
+(function() {
+    // Run immediately for mobile devices
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        console.log('Mobile device detected, ensuring loading screen');
+        
+        // Ensure loading overlay is visible immediately on mobile
+        const ensureLoadingScreen = function() {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            if (loadingOverlay) {
+                loadingOverlay.style.display = 'flex';
+                loadingOverlay.style.visibility = 'visible';
+                loadingOverlay.style.opacity = '1';
+                loadingOverlay.style.zIndex = '10000';
+                console.log('Mobile loading screen enforced');
+            }
+        };
+        
+        // Run when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', ensureLoadingScreen);
+        } else {
+            ensureLoadingScreen();
+        }
+        
+        // Also run after a short delay as failsafe
+        setTimeout(ensureLoadingScreen, 100);
+    }
+})();
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize loading manager first
-    initLoadingManager();
+    // Initialize loading manager first and ensure it works on mobile
+    try {
+        initLoadingManager();
+    } catch (error) {
+        console.error('Loading manager failed:', error);
+        // Fallback: try to hide loading overlay manually
+        const loadingOverlay = document.getElementById('loading-overlay');
+        if (loadingOverlay) {
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+                document.body.classList.remove('loading');
+            }, 3000);
+        }
+    }
     
     try {
         initMobileNav();
@@ -636,7 +680,12 @@ function initLoadingManager() {
     const loadingOverlay = document.getElementById('loading-overlay');
     const mainContent = document.querySelector('main');
     
-    if (!loadingOverlay) return;
+    if (!loadingOverlay) {
+        console.warn('Loading overlay not found');
+        return;
+    }
+    
+    console.log('Initializing loading manager...');
     
     // Prevent scrolling during loading
     document.body.classList.add('loading');
@@ -647,15 +696,36 @@ function initLoadingManager() {
     document.documentElement.style.width = '100%';
     document.documentElement.style.height = '100%';
     
-    // Prevent touch scrolling on mobile
+    // Mobile-specific handling
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    console.log('Mobile device detected:', isMobile);
+    
+    if (isMobile) {
+        // Additional mobile fixes
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        document.body.style.height = '100%';
+        document.body.style.overflow = 'hidden';
+        
+        // Add mobile-specific viewport fixes
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no');
+        }
+    }
+    
+    // Prevent touch scrolling on mobile (define in scope for proper cleanup)
     function preventScroll(e) {
         e.preventDefault();
         e.stopPropagation();
         return false;
     }
     
-    loadingOverlay.addEventListener('touchmove', preventScroll, { passive: false });
-    loadingOverlay.addEventListener('touchstart', preventScroll, { passive: false });
+    // Add touch event listeners to prevent mobile scrolling
+    if (loadingOverlay) {
+        loadingOverlay.addEventListener('touchmove', preventScroll, { passive: false });
+        loadingOverlay.addEventListener('touchstart', preventScroll, { passive: false });
+    }
     document.addEventListener('touchmove', preventScroll, { passive: false });
     
     // Set main content as hidden initially
@@ -751,10 +821,26 @@ function initLoadingManager() {
             document.documentElement.style.width = '';
             document.documentElement.style.height = '';
             
-            // Remove touch event listeners
-            loadingOverlay.removeEventListener('touchmove', preventScroll);
-            loadingOverlay.removeEventListener('touchstart', preventScroll);
+            // Remove mobile-specific body styles
+            document.body.style.position = '';
+            document.body.style.width = '';
+            document.body.style.height = '';
+            document.body.style.overflow = '';
+            
+            // Restore viewport
+            const viewport = document.querySelector('meta[name="viewport"]');
+            if (viewport) {
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, viewport-fit=cover');
+            }
+            
+            // Remove touch event listeners with proper cleanup
+            if (loadingOverlay) {
+                loadingOverlay.removeEventListener('touchmove', preventScroll);
+                loadingOverlay.removeEventListener('touchstart', preventScroll);
+            }
             document.removeEventListener('touchmove', preventScroll);
+            
+            console.log('Loading complete, scrolling restored');
             
             if (mainContent) {
                 mainContent.classList.remove('content-hidden');

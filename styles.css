@@ -44,6 +44,10 @@ body.loading * {
     justify-content: center;
     transition: opacity 0.8s ease, visibility 0.8s ease;
     overflow: hidden;
+    /* Mobile-specific fixes */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+    touch-action: none;
 }
 
 .loading-overlay::before {
@@ -315,14 +319,16 @@ body.loading * {
 @media (max-width: 768px) {
     .loading-overlay {
         /* Ensure full coverage on mobile */
-        width: 100vw;
-        height: 100vh;
-        height: 100dvh; /* Dynamic viewport height for better mobile support */
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important; /* Dynamic viewport height for better mobile support */
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        z-index: 10000 !important;
+        display: flex !important;
     }
     
     .loading-content {
