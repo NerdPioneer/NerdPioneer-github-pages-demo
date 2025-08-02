@@ -1482,7 +1482,6 @@ h1, h2, h3, h4, h5, h6 {
     background: white;
     border-radius: 16px;
     padding: 2.5rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border: 1px solid #e2e8f0;
     transition: all 0.3s ease;
     height: fit-content;
@@ -1492,7 +1491,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .education-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+    border-color: rgba(102, 126, 234, 0.3);
 }
 
 
@@ -2303,7 +2302,7 @@ h1, h2, h3, h4, h5, h6 {
 .projects .section-subtitle {
     text-align: center;
     color: #6366f1;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     max-width: 600px;
@@ -2349,7 +2348,6 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -2359,7 +2357,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .project-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     border-color: rgba(99, 102, 241, 0.3);
 }
 
@@ -2404,7 +2401,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .project-title-section h3 {
     color: #1e293b;
-    font-size: 1.375rem;
+    font-size: 1.4rem;
     font-weight: 700;
     margin: 0 0 0.5rem 0;
     line-height: 1.3;
