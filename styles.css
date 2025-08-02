@@ -3286,14 +3286,6 @@ section.blog .section-subtitle,
     box-shadow: 0 12px 30px rgba(0, 171, 108, 0.2);
 }
 
-.substack-card {
-    
-}
-
-.substack-card:hover {
-    
-}
-
 .github-card {
     border-color: #333;
 }
@@ -3321,10 +3313,6 @@ section.blog .section-subtitle,
 
 .github-icon {
     color: #333;
-}
-
-.substack-icon {
-    
 }
 
 .platform-card:hover .platform-icon {
@@ -3403,18 +3391,6 @@ section.blog .section-subtitle,
     background: #000;
     border-color: #000;
     transform: translateY(-1px);
-}
-
-.substack-btn {
-    
-}
-
-.substack-btn:hover {
-    
-}
-
-.substack-btn:hover .btn-content i {
-    
 }
 
 .btn-content {
@@ -4215,6 +4191,14 @@ section.blog .section-subtitle,
 }
 
 @media (max-width: 768px) {
+    .nav-container {
+        padding: 1rem 1.5rem;
+        max-width: 100%;
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -4227,28 +4211,49 @@ section.blog .section-subtitle,
         transition: 0.3s;
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.3);
         border-top: 1px solid rgba(0, 255, 255, 0.3);
-        padding: 2rem 0;
-        z-index: 999; 
+        padding: 1.5rem 0;
+        z-index: 999;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
     }
 
     .nav-menu.active {
         left: 0;
     }
 
+    .nav-links {
+        flex-direction: column;
+        padding: 0 1rem;
+        gap: 0;
+        list-style: none;
+        margin: 0;
+    }
+
     .nav-link {
         color: #f1f5f9 !important;
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 600;
-        padding: 1rem 0;
+        padding: 1.2rem 1.5rem;
         display: block;
         text-decoration: none;
-        transition: color 0.3s ease;
+        transition: all 0.3s ease;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .nav-link:hover {
         color: #00ffff !important;
         background: rgba(0, 255, 255, 0.1);
+        border-radius: 8px;
+        margin: 0 0.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
     .nav-toggle {
@@ -5610,7 +5615,7 @@ section.blog .section-subtitle,
 /* Mobile Navigation Hamburger Menu Styles */
 .hamburger-line {
     display: block;
-    width: 25px;
+    width: 24px;
     height: 3px;
     background: #00ffff;
     margin: 5px 0;
@@ -5643,4 +5648,21 @@ section.blog .section-subtitle,
 
 .nav-toggle.active .hamburger-line:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Mobile specific fixes */
+@media (max-width: 768px) {
+    .music-section {
+        padding-bottom: 6rem !important;
+    }
+    
+    /* Ensure music player content isn't cut off on mobile */
+    .music-player-container {
+        margin-bottom: 2rem;
+    }
+    
+    /* Add extra spacing for mobile viewport bottom */
+    .section:last-child {
+        padding-bottom: 4rem;
+    }
 }
