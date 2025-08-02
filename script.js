@@ -631,7 +631,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(fetchMediumPosts, 1000);
 });
 
-// Loading Manager
+// Enhanced Loading Manager with Cybersecurity Theme
 function initLoadingManager() {
     const loadingOverlay = document.getElementById('loading-overlay');
     const mainContent = document.querySelector('main');
@@ -643,19 +643,81 @@ function initLoadingManager() {
         mainContent.classList.add('content-hidden');
     }
     
-    // Track loaded resources
-    let loadedResources = 0;
-    const totalResources = document.querySelectorAll('img').length + 2; // images + fonts + css
+    // Cybersecurity-themed loading sequence
+    let loadingPhase = 0;
+    const loadingTexts = [
+        'SYSTEM INITIALIZING',
+        'SCANNING SECURITY PROTOCOLS',
+        'LOADING PORTFOLIO DATA',
+        'ESTABLISHING SECURE CONNECTION',
+        'AUTHENTICATION COMPLETE'
+    ];
     
-    function incrementLoaded() {
-        loadedResources++;
-        if (loadedResources >= totalResources || loadedResources >= 5) { // Don't wait too long
-            hideLoadingOverlay();
+    const loadingSubtexts = [
+        'Booting cybersecurity systems...',
+        'Verifying threat detection modules...',
+        'Loading professional credentials...',
+        'Encrypting data transmission...',
+        'Welcome to secure portfolio.'
+    ];
+    
+    const loadingTextElement = document.querySelector('.loading-text');
+    const loadingSubtextElement = document.querySelector('.loading-subtext');
+    
+    // Animate through loading phases
+    function updateLoadingText() {
+        if (loadingTextElement && loadingSubtextElement && loadingPhase < loadingTexts.length) {
+            loadingTextElement.textContent = loadingTexts[loadingPhase];
+            loadingSubtextElement.textContent = loadingSubtexts[loadingPhase];
+            loadingPhase++;
         }
     }
     
-    // Hide loading overlay
+    // Show loading phases with timing
+    const loadingInterval = setInterval(updateLoadingText, 800);
+    updateLoadingText(); // Show first phase immediately
+    
+    // Track loaded resources
+    let loadedResources = 0;
+    const totalResources = document.querySelectorAll('img').length + 2;
+    let minLoadingTime = 4000; // Minimum 4 seconds to show the cool loading screen
+    let startTime = Date.now();
+    
+    function incrementLoaded() {
+        loadedResources++;
+        checkIfReadyToHide();
+    }
+    
+    function checkIfReadyToHide() {
+        const elapsed = Date.now() - startTime;
+        const resourcesLoaded = loadedResources >= totalResources || loadedResources >= 5;
+        
+        if (resourcesLoaded && elapsed >= minLoadingTime) {
+            clearInterval(loadingInterval);
+            hideLoadingOverlay();
+        } else if (resourcesLoaded) {
+            // Resources loaded but not enough time passed - wait for min time
+            setTimeout(() => {
+                clearInterval(loadingInterval);
+                hideLoadingOverlay();
+            }, minLoadingTime - elapsed);
+        }
+    }
+    
+    // Force hide after maximum time
+    setTimeout(() => {
+        clearInterval(loadingInterval);
+        hideLoadingOverlay();
+    }, 6000); // Maximum 6 seconds
+    
+    // Hide loading overlay with cybersecurity completion message
     function hideLoadingOverlay() {
+        // Final phase
+        if (loadingTextElement && loadingSubtextElement) {
+            loadingTextElement.textContent = 'ACCESS GRANTED';
+            loadingSubtextElement.textContent = 'Portfolio loaded successfully.';
+        }
+        
         setTimeout(() => {
             loadingOverlay.classList.add('hidden');
             if (mainContent) {
@@ -668,8 +730,8 @@ function initLoadingManager() {
                 if (loadingOverlay.parentNode) {
                     loadingOverlay.parentNode.removeChild(loadingOverlay);
                 }
-            }, 500);
-        }, 800); // Minimum loading time for smooth experience
+            }, 800);
+        }, 1000); // Show "ACCESS GRANTED" for 1 second
     }
     
     // Load images with lazy loading enhancement

@@ -1,18 +1,6 @@
 <!DOCTYPE html>
-<html lang    <meta property="og:title" content="Ezekiel Obeisun Jr. — Cloud Computing Graduate | Network Engineer">
-    <meta property="og:description" content="Securing systems, solving complex network problems, and delivering 1% better every day.">en">
+<html lang="en">
 <head>
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID', {
-            page_title: 'Ezekiel Obeisun Jr. Portfolio',
-            custom_map: {'custom_parameter_1': 'portfolio_section'}
-        });
-    </script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -56,6 +44,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Cybersecurity themed font for loading screen -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap"></noscript>
     
     
     <!-- Critical CSS for above-the-fold content -->
@@ -169,11 +161,23 @@
     </script>
 </head>
 <body>
-    <!-- Loading Overlay -->
+    <!-- Cybersecurity Themed Loading Overlay -->
     <div class="loading-overlay" id="loading-overlay">
         <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Loading Portfolio...</div>
+            <div class="cyber-loader">
+                <div class="loading-spinner">
+                    <div class="cyber-core"></div>
+                </div>
+                <div class="circuit-lines">
+                    <div class="circuit-line"></div>
+                    <div class="circuit-line"></div>
+                    <div class="circuit-line"></div>
+                    <div class="circuit-line"></div>
+                </div>
+            </div>
+            <div class="loading-text">SYSTEM INITIALIZING</div>
+            <div class="loading-subtext">Loading cybersecurity portfolio...</div>
+            <div class="cyber-progress"></div>
         </div>
     </div>
     
