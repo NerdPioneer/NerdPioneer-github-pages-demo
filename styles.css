@@ -5618,25 +5618,27 @@ section.blog .section-subtitle,
 .hamburger-line {
     display: block;
     width: 24px;
-    height: 3px;
+    height: 2px;
     background: #00ffff;
-    margin: 5px 0;
+    margin: 4px 0;
     transition: 0.3s;
-    border-radius: 2px;
+    border-radius: 1px;
 }
 
 .nav-toggle {
-    background: transparent;
-    border: 2px solid #00ffff;
+    background: #1e293b;
+    border: 1px solid rgba(0, 255, 255, 0.3);
     cursor: pointer;
-    padding: 8px;
+    padding: 10px;
     border-radius: 6px;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .nav-toggle:hover {
-    background: rgba(0, 255, 255, 0.1);
-    transform: scale(1.05);
+    background: #334155;
+    border-color: #00ffff;
+    transform: translateY(-1px);
 }
 
 /* Hamburger Animation */
