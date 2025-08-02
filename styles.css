@@ -4400,19 +4400,33 @@ section.blog .section-subtitle,
     }
 
     .nav-toggle {
-        display: flex;
+        display: flex !important;
+        z-index: 10001 !important;
     }
 
-    .nav-toggle.active .bar:nth-child(2) {
+    /* Mobile Navigation Styles */
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #0f172a;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        border-top: 2px solid #00ffff;
+        border-bottom: 2px solid #00ffff;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out, opacity 0.3s ease;
         opacity: 0;
+        visibility: hidden;
+        z-index: 10000;
     }
 
-    .nav-toggle.active .bar:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
-    }
-
-    .nav-toggle.active .bar:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
+    .nav-menu.active {
+        max-height: 400px;
+        opacity: 1;
+        visibility: visible;
     }
 
     .hero {
@@ -5760,25 +5774,28 @@ section.blog .section-subtitle,
     display: block;
     width: 24px;
     height: 2px;
-    background: #00ffff;
+    background: #00ffff !important;
     margin: 4px 0;
     transition: 0.3s;
     border-radius: 1px;
 }
 
 .nav-toggle {
-    background: #1e293b;
-    border: 1px solid rgba(0, 255, 255, 0.3);
+    background: #1e293b !important;
+    border: 1px solid rgba(0, 255, 255, 0.3) !important;
     cursor: pointer;
     padding: 10px;
     border-radius: 6px;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    z-index: 10001 !important;
 }
 
 .nav-toggle:hover {
-    background: #334155;
-    border-color: #00ffff;
+    background: #334155 !important;
+    border-color: #00ffff !important;
     transform: translateY(-1px);
 }
 
@@ -5795,8 +5812,18 @@ section.blog .section-subtitle,
     transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* Mobile specific fixes */
+/* Mobile specific fixes for navbar */
 @media (max-width: 768px) {
+    .nav-toggle {
+        display: flex !important;
+        z-index: 10001 !important;
+    }
+    
+    .hamburger-line {
+        background: #00ffff !important;
+        display: block !important;
+    }
+    
     .music-section {
         padding-bottom: 6rem !important;
     }
