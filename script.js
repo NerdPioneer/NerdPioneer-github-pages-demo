@@ -638,6 +638,26 @@ function initLoadingManager() {
     
     if (!loadingOverlay) return;
     
+    // Prevent scrolling during loading
+    document.body.classList.add('loading');
+    
+    // Additional mobile scroll prevention
+    document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.position = 'fixed';
+    document.documentElement.style.width = '100%';
+    document.documentElement.style.height = '100%';
+    
+    // Prevent touch scrolling on mobile
+    function preventScroll(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+    
+    loadingOverlay.addEventListener('touchmove', preventScroll, { passive: false });
+    loadingOverlay.addEventListener('touchstart', preventScroll, { passive: false });
+    document.addEventListener('touchmove', preventScroll, { passive: false });
+    
     // Set main content as hidden initially
     if (mainContent) {
         mainContent.classList.add('content-hidden');
@@ -650,7 +670,8 @@ function initLoadingManager() {
         'SCANNING SECURITY PROTOCOLS',
         'LOADING PORTFOLIO DATA',
         'ESTABLISHING SECURE CONNECTION',
-        'AUTHENTICATION COMPLETE'
+        'AUTHENTICATION COMPLETE',
+        'ACCESS GRANTED'
     ];
     
     const loadingSubtexts = [
@@ -658,7 +679,8 @@ function initLoadingManager() {
         'Verifying threat detection modules...',
         'Loading professional credentials...',
         'Encrypting data transmission...',
-        'Welcome to secure portfolio.'
+        'Welcome to secure portfolio.',
+        'Portfolio loaded successfully.'
     ];
     
     const loadingTextElement = document.querySelector('.loading-text');
@@ -720,6 +742,20 @@ function initLoadingManager() {
         
         setTimeout(() => {
             loadingOverlay.classList.add('hidden');
+            // Re-enable scrolling
+            document.body.classList.remove('loading');
+            
+            // Remove mobile scroll prevention
+            document.documentElement.style.overflow = '';
+            document.documentElement.style.position = '';
+            document.documentElement.style.width = '';
+            document.documentElement.style.height = '';
+            
+            // Remove touch event listeners
+            loadingOverlay.removeEventListener('touchmove', preventScroll);
+            loadingOverlay.removeEventListener('touchstart', preventScroll);
+            document.removeEventListener('touchmove', preventScroll);
+            
             if (mainContent) {
                 mainContent.classList.remove('content-hidden');
                 mainContent.classList.add('content-visible');
